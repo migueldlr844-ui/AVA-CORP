@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AVA CORP – Formation FOSS sur l'élevage de hannetons au Cameroon. Inscrivez-vous et découvrez notre boutique agropastorale." />
+  <title>AVA CORP – Projet FOSS | Formation Hannetons Cameroun</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    /* ==========================================================================
+       1. TOKENS DE CONCEPTION (VARIABLES)
+       ========================================================================== */
+    :root {
+      --color-primary: #1A4D2E;      /* Vert feuillage dense */
+      --color-primary-light: #E8EFE9;/* Fond vert très doux */
+      --color-secondary: #C8922A;    /* Or terreux / Dorure */
+      --color-dark: #111827;         /* Anthracite profond */
+      --color-light: #F9FAFB;        /* Blanc cassé */
+      --color-border: #E5E7EB;       /* Gris de délimitation fin */
+      --color-error: #DC2626;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ==========================================================================
+       2. REINITIALISATION ET STYLES DE BASE
+       ========================================================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--color-dark);
+      background-color: #ffffff;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    /* Boutons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: var(--font-sans); font-weight: 600; font-size: 14px;
+      padding: 12px 28px; border-radius: 4px; border: 1px solid transparent;
+      cursor: pointer; transition: var(--transition-smooth); text-decoration: none;
+    }
+    .btn-primary { background-color: var(--color-primary); color: #ffffff; }
+    .btn-primary:hover { background-color: var(--color-dark); }
+    .btn-secondary { background-color: var(--color-secondary); color: #ffffff; }
+    .btn-secondary:hover { opacity: 0.9; }
+    .btn-ghost { background-color: transparent; color: var(--color-dark); border-color: var(--color-border); }
+    .btn-ghost:hover { background-color: var(--color-light); }
+    .btn-whatsapp { background-color: #25D366; color: white; }
+    .btn-whatsapp:hover { background-color: #20ba59; }
+    .btn-outline { background-color: transparent; border-color: var(--color-border); color: #6B7280; }
+    .btn-outline:hover { background-color: #FEE2E2; color: var(--color-error); border-color: #FCA5A5; }
+    .btn-full { width: 100%; }
+    .btn-icon-only { padding: 12px; border-radius: 50%; }
+
+    /* Sections */
+    .section { padding: 100px 0; border-bottom: 1px solid var(--color-border); }
+    .section-header { max-width: 600px; margin-bottom: 60px; }
+    .section-eyebrow {
+      font-family: var(--font-mono); color: var(--color-secondary);
+      font-size: 12px; text-transform: uppercase; letter-spacing: 2px;
+      display: block; margin-bottom: 12px;
+    }
+    .section-title { font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1.1; color: var(--color-primary); margin-bottom: 20px; }
+    .section-title em { font-style: italic; font-weight: 400; color: var(--color-secondary); }
+    .section-desc { font-size: 16px; color: #4B5563; }
+
+    /* ==========================================================================
+       3. NAVIGATION NAVBAR
+       ========================================================================== */
+    .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background-color: transparent; border-bottom: 1px solid transparent; transition: var(--transition-smooth); }
+    .navbar--sticky { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-border); padding: 10px 0; }
+    .nav-inner { max-width: 1300px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-dark); }
+    .logo-mark { background-color: var(--color-primary); color: white; font-family: var(--font-display); font-weight: 900; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 18px; border-radius: 4px; }
+    .logo-text { font-size: 16px; letter-spacing: 1px; }
+    .nav-links a { text-decoration: none; color: #4B5563; font-size: 14px; font-weight: 500; margin-left: 32px; transition: var(--transition-smooth); }
+    .nav-links a:hover { color: var(--color-primary); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .cart-btn { background: none; border: none; position: relative; cursor: pointer; color: var(--color-dark); }
+    .cart-count { position: absolute; top: -8px; right: -8px; background-color: var(--color-secondary); color: white; font-size: 10px; font-family: var(--font-mono); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    
+    .burger-btn { display: none; background: none; border: none; flex-direction: column; gap: 6px; cursor: pointer; }
+    .burger-btn span { width: 24px; height: 2px; background-color: var(--color-dark); transition: var(--transition-smooth); }
+
+    .mobile-menu { position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 24px; display: flex; flex-direction: column; gap: 16px; border-bottom: 1px solid var(--color-border); transform: translateY(-100%); opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
+    .mobile-menu--active { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-link { text-decoration: none; color: var(--color-dark); font-size: 18px; font-family: var(--font-display); }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero { padding-top: 160px; padding-bottom: 100px; background-color: var(--color-primary-light); display: flex; align-items: center; position: relative; min-height: 90vh; }
+    .hero-pattern { position: absolute; inset: 0; }
+    .hero-content { position: relative; z-index: 2; max-width: 650px; padding: 0 24px; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--color-primary); background-color: rgba(26, 77, 46, 0.08); padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; }
+    .hero-title { font-family: var(--font-display); font-size: 64px; font-weight: 900; line-height: 1.05; color: var(--color-primary); margin-bottom: 24px; }
+    .hero-title em { font-style: italic; font-weight: 400; color: var(--color-secondary); }
+    .hero-sub { font-size: 18px; color: #4B5563; margin-bottom: 40px; }
+    .hero-cta-group { display: flex; gap: 16px; margin-bottom: 60px; }
+    .hero-stats { display: flex; align-items: center; gap: 24px; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-value { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-primary); }
+    .stat-label { font-size: 12px; color: #6B7280; }
+    .stat-divider { width: 1px; height: 40px; background-color: rgba(0,0,0,0.1); }
+    
+    .hero-visual { position: absolute; right: 10%; bottom: 10%; display: block; }
+    .hero-blob { background-color: var(--color-primary); width: 300px; height: 300px; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; display: flex; align-items: center; justify-content: center; animation: morphing 8s ease-in-out infinite; }
+    .blob-inner { color: var(--color-secondary); }
+    .blob-icon { width: 80px; height: 80px; }
+    @keyframes morphing { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 45% 55% 50% 50% / 50% 55% 45% 50%; } }
+
+    .rotating-badge { position: fixed; bottom: 40px; right: 40px; z-index: 50; pointer-events: none; }
+    .rotating-badge svg { animation: rotate 20s linear infinite; }
+    @keyframes rotate { to { transform: rotate(360deg); } }
+
+    /* ==========================================================================
+       5. FORMATION ET MODULES
+       ========================================================================== */
+    .formation-banner { background-color: var(--color-primary); color: white; padding: 32px; border-radius: 4px; display: flex; justify-content: space-around; margin-bottom: 60px; }
+    .banner-item { display: flex; align-items: center; gap: 16px; }
+    .banner-item i { color: var(--color-secondary); width: 32px; height: 32px; }
+    .banner-label { display: block; font-size: 12px; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+    .banner-divider { width: 1px; background-color: rgba(255,255,255,0.15); }
+
+    .modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+    .module-card { border: 1px solid var(--color-border); padding: 40px; border-radius: 4px; }
+    .module-card--practice { background-color: var(--color-light); }
+    .module-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+    .module-header h3 { font-family: var(--font-display); font-size: 24px; }
+    .module-tag { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
+    .module-tag--theory { background-color: #E0F2FE; color: #0369A1; }
+    .module-tag--practice { background-color: #FEF3C7; color: #B45309; }
+    .module-list { list-style: none; }
+    .module-list li { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--color-border); }
+    .module-list li:last-child { border-bottom: none; }
+    .module-num { font-family: var(--font-mono); color: var(--color-secondary); font-size: 14px; }
+    .formation-cta { text-align: center; }
+    .cta-note { font-size: 12px; color: #6B7280; margin-top: 12px; }
+
+    /* ==========================================================================
+       6. EQUIPE DE FORMATEURS
+       ========================================================================== */
+    .equipe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .formateur-card { border: 1px solid var(--color-border); padding: 32px; position: relative; }
+    .formateur-card--featured { border-color: var(--color-secondary); background-color: var(--color-primary-light); }
+    .formateur-featured-badge { position: absolute; top: -12px; left: 32px; background-color: var(--color-secondary); color: white; font-size: 10px; font-family: var(--font-mono); padding: 4px 12px; text-transform: uppercase; }
+    .formateur-avatar { width: 64px; height: 64px; border-radius: 50%; background-color: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 20px; margin-bottom: 24px; position: relative; }
+    .formateur-avatar::after { content: attr(data-initials); }
+    .avatar-ring { position: absolute; inset: -4px; border: 1px dashed var(--color-secondary); border-radius: 50%; }
+    .formateur-info h3 { font-family: var(--font-display); font-size: 20px; margin-bottom: 4px; }
+    .formateur-role { font-size: 13px; color: var(--color-secondary); display: block; margin-bottom: 16px; font-weight: 500; }
+    .formateur-info p { font-size: 14px; color: #4B5563; margin-bottom: 24px; }
+    .formateur-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .formateur-tags span { background-color: #ffffff; border: 1px solid var(--color-border); font-size: 11px; padding: 4px 10px; border-radius: 20px; color: #374151; }
+
+    /* ==========================================================================
+       7. BOUTIQUE (GRILLE ET CARTES)
+       ========================================================================== */
+    .produits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .product-card { border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; transition: var(--transition-smooth); }
+    .product-card:hover { transform: translateY(-4px); }
+    .product-img-placeholder { height: 220px; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid var(--color-border); }
+    .product-badge { position: absolute; top: 16px; left: 16px; background-color: white; border: 1px solid var(--color-dark); font-size: 10px; font-family: var(--font-mono); padding: 4px 10px; text-transform: uppercase; }
+    .prod-icon { width: 48px; height: 48px; color: rgba(0,0,0,0.15); }
+    .product-info { padding: 24px; }
+    .product-info h3 { font-family: var(--font-display); font-size: 20px; margin-bottom: 8px; }
+    .product-info p { font-size: 13px; color: #6B7280; height: 60px; overflow: hidden; margin-bottom: 20px; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: var(--font-mono); font-weight: 700; color: var(--color-primary); }
+
+    /* ==========================================================================
+       8. INTERFACE DU PANIER SIDEBAR
+       ========================================================================== */
+    .cart-sidebar { position: fixed; top: 0; right: 0; width: 420px; height: 100%; background-color: white; z-index: 120; padding: 40px; display: flex; flex-direction: column; transform: translateX(100%); transition: var(--transition-smooth); }
+    .cart-sidebar--active { transform: translateX(0); }
+    .cart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
+    .cart-header h2 { font-family: var(--font-display); font-size: 24px; display: flex; align-items: center; gap: 12px; }
+    .cart-close-btn { background: none; border: none; cursor: pointer; color: var(--color-dark); }
+    .cart-items-wrapper { flex: 1; overflow-y: auto; }
+    .cart-empty { text-align: center; padding: 40px 0; color: #9CA3AF; }
+    .cart-empty i { width: 48px; height: 48px; margin-bottom: 16px; }
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--color-border); }
+    .cart-item-details h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .cart-item-price { font-family: var(--font-mono); font-size: 13px; color: var(--color-secondary); }
+    .cart-item-actions { display: flex; align-items: center; gap: 12px; }
+    .qty-btn { background: none; border: 1px solid var(--color-border); width: 24px; height: 24px; cursor: pointer; }
+    .qty-val { font-family: var(--font-mono); font-size: 13px; }
+    .cart-footer { margin-top: auto; padding-top: 24px; }
+    .cart-total-line { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+    .cart-total-amount { color: var(--color-primary); }
+    .cart-footer .btn { margin-bottom: 12px; }
+
+    /* ==========================================================================
+       9. MODALS, TOASTS & CONTACT
+       ========================================================================== */
+    .modal-overlay { position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.6); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
+    .modal-overlay--active { opacity: 1; pointer-events: auto; }
+    .modal { background-color: white; padding: 48px; width: 100%; max-width: 500px; position: relative; border-radius: 4px; }
+    .modal-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; }
+    .modal-icon { color: var(--color-secondary); margin-bottom: 16px; }
+    .modal-title { font-family: var(--font-display); font-size: 28px; margin-bottom: 8px; }
+    .modal-sub { font-size: 14px; color: #6B7280; margin-bottom: 32px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+    .form-group input { width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: 4px; font-family: var(--font-sans); }
+    .form-error { font-size: 11px; color: var(--color-error); display: block; margin-top: 4px; }
+
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .contact-infos { margin-top: 32px; }
+    .contact-item { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; color: var(--color-dark); text-decoration: none; }
+    .contact-item i { color: var(--color-secondary); }
+    .whatsapp-card { background-color: var(--color-light); border: 1px solid var(--color-border); padding: 40px; text-align: center; }
+    .wa-icon { width: 48px; height: 48px; color: #25D366; margin-bottom: 16px; }
+    .whatsapp-card h3 { font-family: var(--font-display); font-size: 22px; margin-bottom: 8px; }
+    .whatsapp-card p { font-size: 14px; color: #6B7280; margin-bottom: 24px; }
+
+    .overlay { position: fixed; inset: 0; background-color: rgba(0,0,0,0.4); z-index: 80; opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
+    .overlay--active { opacity: 1; pointer-events: auto; }
+    
+    .toast { position: fixed; bottom: 24px; left: 24px; background-color: var(--color-dark); color: white; padding: 14px 24px; font-size: 14px; font-weight: 500; border-radius: 4px; z-index: 300; transform: translateY(100px); opacity: 0; transition: var(--transition-smooth); }
+    .toast--active { transform: translateY(0); opacity: 1; }
+    .footer { background-color: var(--color-dark); color: white; padding: 60px 0; text-align: center; }
+    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
+    .footer-brand .logo-mark { background-color: var(--color-secondary); }
+    .footer-tagline { font-family: var(--font-display); font-style: italic; color: #9CA3AF; margin-bottom: 24px; }
+    .footer-copy { font-size: 12px; color: #4B5563; }
+
+    /* ==========================================================================
+       10. MEDIA QUERIES (RESPONSIVE RESEAU MOBILE)
+       ========================================================================== */
+    @media (max-width: 968px) {
+      .hero { flex-direction: column; text-align: center; padding-top: 120px; justify-content: center; }
+      .hero-content { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
+      .hero-title { font-size: 46px; }
+      .hero-cta-group { justify-content: center; }
+      .hero-visual { display: none; }
+      .modules-grid, .equipe-grid, .produits-grid, .contact-inner { grid-template-columns: 1fr; gap: 24px; }
+      .formation-banner { flex-direction: column; gap: 20px; align-items: flex-start; }
+      .banner-divider { width: 100%; height: 1px; }
+      .nav-links { display: none; }
+      .burger-btn { display: flex; }
+    }
+    @media (max-width: 480px) {
+      .cart-sidebar { width: 100%; padding: 24px; }
+      .modal { padding: 24px; }
+      .hero-title { font-size: 36px; }
+      .hero-cta-group { flex-direction: column; width: 100%; }
+      .hero-cta-group .btn { width: 100%; }
+      .rotating-badge { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="rotating-badge" aria-hidden="true">
+    <svg viewBox="0 0 120 120" width="120" height="120">
+      <defs>
+        <path id="circlePath" d="M 60,60 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" />
+      </defs>
+      <text font-size="10.5" fill="#C8922A" font-family="DM Mono, monospace" letter-spacing="2">
+        <textPath href="#circlePath">FOSS · CAMEROUN · 2025 · AVA CORP ·</textPath>
+      </text>
+      <circle cx="60" cy="60" r="6" fill="#1A4D2E" />
+    </svg>
+  </div>
+
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="AVA CORP">
+        <span class="logo-mark">A</span>
+        <span class="logo-text">AVA <strong>CORP</strong></span>
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#formation">Formation</a>
+        <a href="#equipe">Équipe</a>
+        <a href="#boutique">Boutique</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="cart-btn" id="cartToggle" aria-label="Ouvrir le panier">
+          <i data-lucide="shopping-basket"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#formation" class="mobile-link">Formation FOSS</a>
+      <a href="#equipe" class="mobile-link">Notre Équipe</a>
+      <a href="#boutique" class="mobile-link">Boutique</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-pattern" aria-hidden="true">
+        <svg width="100%" height="100%">
+          <defs>
+            <pattern id="organicGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="1.5" fill="rgba(200,146,42,0.18)" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#organicGrid)" />
+        </svg>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-eyebrow"><i data-lucide="leaf"></i> Projet Agropastoral · Cameroun 2025</span>
+        <h1 class="hero-title">L'élevage de<br /><em>hannetons,</em><br />la nouvelle<br />agriculture.</h1>
+        <p class="hero-sub">AVA CORP lance le <strong>Projet FOSS</strong> — une formation pratique et théorique pour maîtriser l'élevage de hannetons au Cameroun. Préparez l'avenir dès le <strong>Samedi 22 Novembre</strong>.</p>
+        <div class="hero-cta-group">
+          <button class="btn btn-primary" id="heroInscriptionBtn"><i data-lucide="arrow-right"></i> S'inscrire à la formation</button>
+          <a href="#boutique" class="btn btn-ghost">Voir la boutique</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-value">5 000</span><span class="stat-label">FCFA Inscription</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-value">8</span><span class="stat-label">Modules</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-value">3</span><span class="stat-label">Experts formateurs</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-blob"><div class="blob-inner"><i data-lucide="bug" class="blob-icon"></i></div></div>
+      </div>
+    </section>
+
+    <section class="section formation-section" id="formation">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Formation Certifiante</span>
+          <h2 class="section-title">Projet FOSS<br /><em>Élevage de Hannetons</em></h2>
+          <p class="section-desc">Une formation complète alliant théorie et pratique pour vous rendre autonome dans la production de hannetons destinés au marché.</p>
+        </div>
+
+        <div class="formation-banner">
+          <div class="banner-item"><i data-lucide="calendar-days"></i><div><span class="banner-label">Date</span>document.getElementById<strong>Samedi 22 Novembre</strong></div></div>
+          <div class="banner-divider"></div>
+          <div class="banner-item"><i data-lucide="ticket"></i><div><span class="banner-label">Inscriptions</span><strong>5 000 FCFA</strong></div></div>
+          <div class="banner-divider"></div>
+          <div class="banner-item"><i data-lucide="graduation-cap"></i><div><span class="banner-label">Frais Universels</span><strong>20 000 FCFA</strong></div></div>
+        </div>
+
+        <div class="modules-grid">
+          <div class="module-card">
+            <div class="module-header"><span class="module-tag module-tag--theory">Théorie</span><h3>Modules Théoriques</h3></div>
+            <ul class="module-list">
+              <li><span class="module-num">01</span><span>Production de hannetons</span></li>
+              <li><span class="module-num">02</span><span>Cycle vital & biologie</span></li>
+              <li><span class="module-num">03</span><span>Phases de métamorphose</span></li>
+              <li><span class="module-num">04</span><span>Processus d'éclosions</span></li>
+              <li><span class="module-num">05</span><span>Types de substrats</span></li>
+            </ul>
+          </div>
+          <div class="module-card module-card--practice">
+            <div class="module-header"><span class="module-tag module-tag--practice">Pratique</span><h3>Modules Pratiques</h3></div>
+            <ul class="module-list">
+              <li><span class="module-num">06</span><span>Calcul des quantités de substrats</span></li>
+              <li><span class="module-num">07</span><span>Techniques de sexage</span></li>
+              <li><span class="module-num">08</span><span>Mise en place des bacs d'élevage</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="formation-cta">
+          <button class="btn btn-primary btn-large" id="formationInscriptionBtn2"><i data-lucide="message-circle"></i> S'inscrire via WhatsApp</button>
+          <p class="cta-note">Places limitées · Accompagnement garanti</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="modal-overlay" id="inscriptionModal" role="dialog" aria-modal="true">
+      <div class="modal">
+        <button class="modal-close" id="modalClose"><i data-lucide="x"></i></button>
+        <div class="modal-icon"><i data-lucide="graduation-cap"></i></div>
+        <h2 class="modal-title">Inscription – Projet FOSS</h2>
+        <p class="modal-sub">Remplissez vos accès pour que l'équipe valide votre place.</p>
+        <div class="modal-form">
+          <div class="form-group">
+            <label for="inscNom">Nom complet *</label>
+            <input type="text" id="inscNom" placeholder="Ex: Jean-Baptiste MBOCK" />
+            <span class="form-error" id="errNom"></span>
+          </div>
+          <div class="form-group">
+            <label for="inscTel">Numéro WhatsApp *</label>
+            <input type="tel" id="inscTel" placeholder="Ex: 6XXXXXXXX" />
+            <span class="form-error" id="errTel"></span>
+          </div>
+          <div class="form-group">
+            <label for="inscVille">Ville de résidence *</label>
+            <input type="text" id="inscVille" placeholder="Ex: Yaoundé, Douala..." />
+            <span class="form-error" id="errVille"></span>
+          </div>
+          <button class="btn btn-primary btn-full" id="submitInscription"><i data-lucide="send"></i> Envoyer via WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="section equipe-section" id="equipe">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Nos Experts</span>
+          <h2 class="section-title">Rencontrez<br /><em>l'équipe de formateurs</em></h2>
+        </div>
+        <div class="equipe-grid">
+          <div class="formateur-card">
+            <div class="formateur-avatar" data-initials="AA"><div class="avatar-ring"></div></div>
+            <div class="formateur-info">
+              <h3>M. ABANE ABANE</h3><span class="formateur-role">Ingénieur Agropastoral</span>
+              <p>Spécialiste en production animale intensive. Concepteur en chef du programme FOSS.</p>
+            </div>
+          </div>
+          <div class="formateur-card formateur-card--featured">
+            <div class="formateur-featured-badge">Directeur Pédagogique</div>
+            <div class="formateur-avatar" data-initials="FA"><div class="avatar-ring"></div></div>
+            <div class="formateur-info">
+              <h3>Franck AVA</h3><span class="formateur-role">Enseignant & Physiologiste</span>
+              <p>Expert en physiologie biologique animale et vulgarisation des techniques agropastorales.</p>
+            </div>
+          </div>
+          <div class="formateur-card">
+            <div class="formateur-avatar" data-initials="MK"><div class="avatar-ring"></div></div>
+            <div class="formateur-info">
+              <h3>Mlle KANA</h3><span class="formateur-role">Ingénieur Technologies Agropastorales</span>
+              <p>Spécialiste des substrats organiques et de la gestion de l'hygrométrie des bacs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section boutique-section" id="boutique">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">E-Boutique AVA CORP</span>
+          <h2 class="section-title">Équipez-vous<br /><em>pour réussir</em></h2>
+        </div>
+        <div class="produits-grid" id="produitsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="contact-inner">
+          <div class="contact-text">
+            <span class="section-eyebrow">Nous contacter</span>
+            <h2 class="section-title">Une question ?<br /><em>Écrivez-nous.</em></h2>
+            <div class="contact-infos">
+              <a href="https://wa.me/237697270262" target="_blank" class="contact-item"><i data-lucide="message-circle"></i><span>+237 697 270 262</span></a>
+              <div class="contact-item"><i data-lucide="map-pin"></i><span>Yaoundé, Cameroun</span></div>
+            </div>
+          </div>
+          <div class="contact-cta-block">
+            <div class="whatsapp-card">
+              <i data-lucide="message-circle" class="wa-icon"></i>
+              <h3>Support WhatsApp Actif</h3>
+              <a href="https://wa.me/237697270262?text=Bonjour%20AVA%20CORP" target="_blank" class="btn btn-whatsapp"><i data-lucide="message-circle"></i> Ouvrir WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-tagline">Innover pour une agriculture africaine durable.</p>
+      <p class="footer-copy">&copy; 2026 AVA CORP. Tous droits réservés. · Projet FOSS · Cameroun</p>
+    </div>
+  </footer>
+
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h2><i data-lucide="shopping-basket"></i> Votre panier</h2>
+      <button class="cart-close-btn" id="cartClose"><i data-lucide="x"></i></button>
+    </div>
+    <div class="cart-items-wrapper" id="cartItemsWrapper"></div>
+    <div class="cart-footer" id="cartFooter">
+      <div class="cart-total-line"><span>Total</span><span class="cart-total-amount" id="cartTotal">0 FCFA</span></div>
+      <button class="btn btn-whatsapp btn-full" id="validateCartBtn"><i data-lucide="message-circle"></i> Valider sur WhatsApp</button>
+      <button class="btn btn-outline btn-full" id="clearCartBtn"><i data-lucide="trash-2"></i> Vider</button>
+    </div>
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const PRODUITS = [
+      { id: "p1", name: "Kit de Démarrage FOSS", price: 35000, desc: "Comprend 2 bacs d'élevage, substrat de base et guide d'éclosion.", tag: "Idéal Débutant" },
+      { id: "p2", name: "Substrat Enrichi (Sac 25kg)", price: 12000, desc: "Mélange organique testé en laboratoire pour accélérer la métamorphose.", tag: "Premium" },
+      { id: "p3", name: "Bac d'Élevage Modulaire", price: 8500, desc: "Bac équipé de grilles d'aération millimétrées anti-évasion.", tag: "Équipement" }
+    ];
+
+    const WHATSAPP_NUM = "237697270262";
+    let panier = JSON.parse(localStorage.getItem('ava_cart')) || [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      
+      // Elements Dom
+      const burgerBtn = document.getElementById("burgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const overlay = document.getElementById("overlay");
+      const navbar = document.getElementById("navbar");
+      const cartToggle = document.getElementById("cartToggle");
+      const cartClose = document.getElementById("cartClose");
+      const cartSidebar = document.getElementById("cartSidebar");
+      const grid = document.getElementById("produitsGrid");
+      
+      // Sticky scroll navbar
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) navbar.classList.add("navbar--sticky");
+        else navbar.classList.remove("navbar--sticky");
+      });
+
+      // Burger Menu
+      burgerBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("mobile-menu--active");
+        overlay.classList.toggle("overlay--active");
+      });
+
+      // Panier Sidebar Toggle
+      const toggleCart = () => {
+        cartSidebar.classList.toggle("cart-sidebar--active");
+        overlay.classList.toggle("overlay--active");
+      };
+      cartToggle.addEventListener("click", toggleCart);
+      cartClose.addEventListener("click", toggleCart);
+      overlay.addEventListener("click", () => {
+        cartSidebar.classList.remove("cart-sidebar--active");
+        mobileMenu.classList.remove("mobile-menu--active");
+        overlay.classList.remove("overlay--active");
+      });
+
+      // Initialisation de la boutique
+      grid.innerHTML = PRODUITS.map(p => `
+        <div class="product-card">
+          <div class="product-img-placeholder">
+            <span class="product-badge">${p.tag}</span><i data-lucide="package" class="prod-icon"></i>
+          </div>
+          <div class="product-info">
+            <h3>${p.name}</h3><p>${p.desc}</p>
+            <div class="product-footer">
+              <span class="product-price">${p.price.toLocaleString()} FCFA</span>
+              <button class="btn btn-secondary btn-icon-only add-btn" data-id="${p.id}"><i data-lucide="plus"></i></button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+
+      grid.querySelectorAll(".add-btn").forEach(b => {
+        b.addEventListener("click", () => {
+          const id = b.getAttribute("data-id");
+          const prod = PRODUITS.find(p => p.id === id);
+          const exist = panier.find(item => item.id === id);
+          if (exist) exist.qty++;
+          else panier.push({ ...prod, qty: 1 });
+          saveAndUpdate();
+          showToast("Produit ajouté !");
+        });
+      });
+
+      // Vider et valider panier
+      document.getElementById("clearCartBtn").addEventListener("click", () => { panier = []; saveAndUpdate(); });
+      document.getElementById("validateCartBtn").addEventListener("click", () => {
+        let text = `🛒 *NOUVELLE COMMANDE - AVA CORP*\n\n`;
+        let total = 0;
+        panier.forEach(i => {
+          text += `▪️ *${i.name}* (x${i.qty}) : ${(i.price * i.qty).toLocaleString()} FCFA\n`;
+          total += i.price * i.qty;
+        });
+        text += `\n💰 *TOTAL global : ${total.toLocaleString()} FCFA*`;
+        window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(text)}`, '_blank');
+      });
+
+      // Modals Formations
+      const modal = document.getElementById("inscriptionModal");
+      document.querySelectorAll("#heroInscriptionBtn, #formationInscriptionBtn, #formationInscriptionBtn2").forEach(btn => {
+        btn.addEventListener("click", () => modal.classList.add("modal-overlay--active"));
+      });
+      document.getElementById("modalClose").addEventListener("click", () => modal.classList.remove("modal-overlay--active"));
+
+      document.getElementById("submitInscription").addEventListener("click", () => {
+        const nom = document.getElementById("inscNom").value;
+        const tel = document.getElementById("inscTel").value;
+        const ville = document.getElementById("inscVille").value;
+        if(!nom || !tel || !ville) return showToast("Remplissez tous les champs.");
+        
+        let msg = `🎓 *INSCRIPTION FORMATION FOSS*\n\n👤 Nom : ${nom}\n📞 Tel : ${tel}\n📍 Ville : ${ville}`;
+        window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
+        modal.classList.remove("modal-overlay--active");
+      });
+
+      window.modifierQty = (id, change) => {
+        const item = panier.find(i => i.id === id);
+        if (item) {
+          item.qty += change;
+          if (item.qty <= 0) panier = panier.filter(i => i.id !== id);
+          saveAndUpdate();
+        }
+      };
+
+      function saveAndUpdate() {
+        localStorage.setItem('ava_cart', JSON.stringify(panier));
+        document.getElementById("cartCount").textContent = panier.reduce((a, b) => a + b.qty, 0);
+        const wrapper = document.getElementById("cartItemsWrapper");
+        const footer = document.getElementById("cartFooter");
+        
+        if(panier.length === 0) {
+          wrapper.innerHTML = `<div class="cart-empty"><p>Votre panier est vide.</p></div>`;
+          footer.style.display = "none";
+        } else {
+          footer.style.display = "block";
+          let total = 0;
+          wrapper.innerHTML = panier.map(i => {
+            total += i.price * i.qty;
+            return `<div class="cart-item">
+              <div class="cart-item-details"><h4>${i.name}</h4><span>${i.price.toLocaleString()} FCFA</span></div>
+              <div class="cart-item-actions">
+                <button class="qty-btn" onclick="modifierQty('${i.id}', -1)">-</button>
+                <span class="qty-val">${i.qty}</span>
+                <button class="qty-btn" onclick="modifierQty('${i.id}', 1)">+</button>
+              </div>
+            </div>`;
+          }).join('');
+          document.getElementById("cartTotal").textContent = `${total.toLocaleString()} FCFA`;
+        }
+      }
+
+      function showToast(m) {
+        const t = document.getElementById("toast"); t.textContent = m; t.classList.add("toast--active");
+        setTimeout(() => t.classList.remove("toast--active"), 2500);
+      }
+      saveAndUpdate();
+    });
+  </script>
+</body>
+</html>

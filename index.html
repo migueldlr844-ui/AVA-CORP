@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AVA CORP – Formation FOSS sur l'élevage de hannetons au Cameroon. Inscrivez-vous et découvrez notre boutique agropastorale." />
+  <meta name="description" content="AVA CORP – Formation FOSS sur l'élevage de hannetons au Cameroun. Inscrivez-vous et découvrez notre boutique agropastorale." />
   <title>AVA CORP – Projet FOSS | Formation Hannetons Cameroun</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,252 +13,1356 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
 
   <style>
-    /* ==========================================================================
-       1. TOKENS DE CONCEPTION (VARIABLES)
-       ========================================================================== */
+    /* ─── 1. TOKENS & RESET ─────────────────────────────────── */
     :root {
-      --color-primary: #1A4D2E;      /* Vert feuillage dense */
-      --color-primary-light: #E8EFE9;/* Fond vert très doux */
-      --color-secondary: #C8922A;    /* Or terreux / Dorure */
-      --color-dark: #111827;         /* Anthracite profond */
-      --color-light: #F9FAFB;        /* Blanc cassé */
-      --color-border: #E5E7EB;       /* Gris de délimitation fin */
-      --color-error: #DC2626;
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-sans: 'Inter', system-ui, sans-serif;
-      --font-mono: 'DM Mono', monospace;
-      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Palette */
+      --color-forest:    #1A4D2E;    /* Vert forêt profond */
+      --color-forest-dk: #122E1D;    /* Vert encore plus foncé */
+      --color-forest-lt: #2E7D4F;    /* Vert clair */
+      --color-gold:      #C8922A;    /* Or terreux */
+      --color-gold-lt:   #DDA94B;    /* Or clair hover */
+      --color-cream:     #F7F3EE;    /* Fond crème */
+      --color-slate:     #3D4A41;    /* Ardoise / Texte principal */
+      --color-slate-lt:  #627267;    /* Ardoise clair */
+      --color-white:     #FFFFFF;
+
+      /* Typographie */
+      --font-playfair:  'Playfair Display', Georgia, serif;
+      --font-inter:     'Inter', system-ui, sans-serif;
+      --font-mono:      'DM Mono', monospace;
+
+      /* Layout & Rayons */
+      --radius-sm:      4px;
+      --radius-md:      8px;
+      --radius-lg:      16px;
+      --radius-full:    9999px;
+      --container-max:  1200px;
+      --section-py:     96px;
+
+      /* Transitions & Ombres */
+      --ease:           cubic-bezier(0.25, 1, 0.5, 1);
+      --dur-fast:       0.2s;
+      --dur-mid:        0.4s;
+      --shadow-sm:      0 2px 8px rgba(26,77,46,0.04);
+      --shadow-md:      0 12px 32px rgba(26,77,46,0.08);
+      --shadow-lg:      0 24px 48px rgba(18,46,29,0.12);
     }
 
-    /* ==========================================================================
-       2. REINITIALISATION ET STYLES DE BASE
-       ========================================================================== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: var(--font-sans);
-      color: var(--color-dark);
-      background-color: #ffffff;
-      line-height: 1.5;
+      font-family: var(--font-inter);
+      background-color: var(--color-white);
+      color: var(--color-slate);
+      line-height: 1.6;
       overflow-x: hidden;
     }
-    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    
-    /* Boutons */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      font-family: var(--font-sans); font-weight: 600; font-size: 14px;
-      padding: 12px 28px; border-radius: 4px; border: 1px solid transparent;
-      cursor: pointer; transition: var(--transition-smooth); text-decoration: none;
-    }
-    .btn-primary { background-color: var(--color-primary); color: #ffffff; }
-    .btn-primary:hover { background-color: var(--color-dark); }
-    .btn-secondary { background-color: var(--color-secondary); color: #ffffff; }
-    .btn-secondary:hover { opacity: 0.9; }
-    .btn-ghost { background-color: transparent; color: var(--color-dark); border-color: var(--color-border); }
-    .btn-ghost:hover { background-color: var(--color-light); }
-    .btn-whatsapp { background-color: #25D366; color: white; }
-    .btn-whatsapp:hover { background-color: #20ba59; }
-    .btn-outline { background-color: transparent; border-color: var(--color-border); color: #6B7280; }
-    .btn-outline:hover { background-color: #FEE2E2; color: var(--color-error); border-color: #FCA5A5; }
-    .btn-full { width: 100%; }
-    .btn-icon-only { padding: 12px; border-radius: 50%; }
 
-    /* Sections */
-    .section { padding: 100px 0; border-bottom: 1px solid var(--color-border); }
-    .section-header { max-width: 600px; margin-bottom: 60px; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input {
+      font-family: inherit;
+      border: none;
+      background: none;
+    }
+
+    /* ─── 2. TYPOGRAPHIE EXTENSION ─────────────────────────── */
+    em {
+      font-family: var(--font-playfair);
+      font-style: italic;
+      font-weight: 700;
+      color: var(--color-gold);
+    }
+
+    /* ─── 3. LAYOUT & STRUCTURE ────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: var(--section-py) 0;
+    }
+
+    .section-header {
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+
     .section-eyebrow {
-      font-family: var(--font-mono); color: var(--color-secondary);
-      font-size: 12px; text-transform: uppercase; letter-spacing: 2px;
-      display: block; margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+      margin-bottom: 12px;
     }
-    .section-title { font-family: var(--font-display); font-size: 42px; font-weight: 700; line-height: 1.1; color: var(--color-primary); margin-bottom: 20px; }
-    .section-title em { font-style: italic; font-weight: 400; color: var(--color-secondary); }
-    .section-desc { font-size: 16px; color: #4B5563; }
 
-    /* ==========================================================================
-       3. NAVIGATION NAVBAR
-       ========================================================================== */
-    .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background-color: transparent; border-bottom: 1px solid transparent; transition: var(--transition-smooth); }
-    .navbar--sticky { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--color-border); padding: 10px 0; }
-    .nav-inner { max-width: 1300px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-dark); }
-    .logo-mark { background-color: var(--color-primary); color: white; font-family: var(--font-display); font-weight: 900; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 18px; border-radius: 4px; }
-    .logo-text { font-size: 16px; letter-spacing: 1px; }
-    .nav-links a { text-decoration: none; color: #4B5563; font-size: 14px; font-weight: 500; margin-left: 32px; transition: var(--transition-smooth); }
-    .nav-links a:hover { color: var(--color-primary); }
-    .nav-actions { display: flex; align-items: center; gap: 16px; }
-    .cart-btn { background: none; border: none; position: relative; cursor: pointer; color: var(--color-dark); }
-    .cart-count { position: absolute; top: -8px; right: -8px; background-color: var(--color-secondary); color: white; font-size: 10px; font-family: var(--font-mono); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    
-    .burger-btn { display: none; background: none; border: none; flex-direction: column; gap: 6px; cursor: pointer; }
-    .burger-btn span { width: 24px; height: 2px; background-color: var(--color-dark); transition: var(--transition-smooth); }
+    .section-title {
+      font-family: var(--font-playfair);
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.15;
+      color: var(--color-forest-dk);
+      margin-bottom: 16px;
+    }
 
-    .mobile-menu { position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 24px; display: flex; flex-direction: column; gap: 16px; border-bottom: 1px solid var(--color-border); transform: translateY(-100%); opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
-    .mobile-menu--active { transform: translateY(0); opacity: 1; pointer-events: auto; }
-    .mobile-link { text-decoration: none; color: var(--color-dark); font-size: 18px; font-family: var(--font-display); }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--color-slate-lt);
+    }
 
-    /* ==========================================================================
-       4. HERO SECTION
-       ========================================================================== */
-    .hero { padding-top: 160px; padding-bottom: 100px; background-color: var(--color-primary-light); display: flex; align-items: center; position: relative; min-height: 90vh; }
-    .hero-pattern { position: absolute; inset: 0; }
-    .hero-content { position: relative; z-index: 2; max-width: 650px; padding: 0 24px; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--color-primary); background-color: rgba(26, 77, 46, 0.08); padding: 6px 14px; border-radius: 20px; margin-bottom: 24px; }
-    .hero-title { font-family: var(--font-display); font-size: 64px; font-weight: 900; line-height: 1.05; color: var(--color-primary); margin-bottom: 24px; }
-    .hero-title em { font-style: italic; font-weight: 400; color: var(--color-secondary); }
-    .hero-sub { font-size: 18px; color: #4B5563; margin-bottom: 40px; }
-    .hero-cta-group { display: flex; gap: 16px; margin-bottom: 60px; }
-    .hero-stats { display: flex; align-items: center; gap: 24px; }
-    .stat { display: flex; flex-direction: column; }
-    .stat-value { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-primary); }
-    .stat-label { font-size: 12px; color: #6B7280; }
-    .stat-divider { width: 1px; height: 40px; background-color: rgba(0,0,0,0.1); }
-    
-    .hero-visual { position: absolute; right: 10%; bottom: 10%; display: block; }
-    .hero-blob { background-color: var(--color-primary); width: 300px; height: 300px; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; display: flex; align-items: center; justify-content: center; animation: morphing 8s ease-in-out infinite; }
-    .blob-inner { color: var(--color-secondary); }
-    .blob-icon { width: 80px; height: 80px; }
-    @keyframes morphing { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 45% 55% 50% 50% / 50% 55% 45% 50%; } }
+    /* ─── 4. NAVBAR ────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background var(--dur-mid) var(--ease), border var(--dur-mid) var(--ease);
+    }
 
-    .rotating-badge { position: fixed; bottom: 40px; right: 40px; z-index: 50; pointer-events: none; }
-    .rotating-badge svg { animation: rotate 20s linear infinite; }
-    @keyframes rotate { to { transform: rotate(360deg); } }
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26, 77, 46, 0.06);
+      box-shadow: var(--shadow-sm);
+    }
 
-    /* ==========================================================================
-       5. FORMATION ET MODULES
-       ========================================================================== */
-    .formation-banner { background-color: var(--color-primary); color: white; padding: 32px; border-radius: 4px; display: flex; justify-content: space-around; margin-bottom: 60px; }
-    .banner-item { display: flex; align-items: center; gap: 16px; }
-    .banner-item i { color: var(--color-secondary); width: 32px; height: 32px; }
-    .banner-label { display: block; font-size: 12px; color: rgba(255,255,255,0.7); text-transform: uppercase; }
-    .banner-divider { width: 1px; background-color: rgba(255,255,255,0.15); }
+    .nav-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: padding var(--dur-mid) var(--ease);
+    }
 
-    .modules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
-    .module-card { border: 1px solid var(--color-border); padding: 40px; border-radius: 4px; }
-    .module-card--practice { background-color: var(--color-light); }
-    .module-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-    .module-header h3 { font-family: var(--font-display); font-size: 24px; }
-    .module-tag { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
-    .module-tag--theory { background-color: #E0F2FE; color: #0369A1; }
-    .module-tag--practice { background-color: #FEF3C7; color: #B45309; }
-    .module-list { list-style: none; }
-    .module-list li { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--color-border); }
-    .module-list li:last-child { border-bottom: none; }
-    .module-num { font-family: var(--font-mono); color: var(--color-secondary); font-size: 14px; }
-    .formation-cta { text-align: center; }
-    .cta-note { font-size: 12px; color: #6B7280; margin-top: 12px; }
+    .navbar.scrolled .nav-inner {
+      padding: 14px 24px;
+    }
 
-    /* ==========================================================================
-       6. EQUIPE DE FORMATEURS
-       ========================================================================== */
-    .equipe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .formateur-card { border: 1px solid var(--color-border); padding: 32px; position: relative; }
-    .formateur-card--featured { border-color: var(--color-secondary); background-color: var(--color-primary-light); }
-    .formateur-featured-badge { position: absolute; top: -12px; left: 32px; background-color: var(--color-secondary); color: white; font-size: 10px; font-family: var(--font-mono); padding: 4px 12px; text-transform: uppercase; }
-    .formateur-avatar { width: 64px; height: 64px; border-radius: 50%; background-color: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 20px; margin-bottom: 24px; position: relative; }
-    .formateur-avatar::after { content: attr(data-initials); }
-    .avatar-ring { position: absolute; inset: -4px; border: 1px dashed var(--color-secondary); border-radius: 50%; }
-    .formateur-info h3 { font-family: var(--font-display); font-size: 20px; margin-bottom: 4px; }
-    .formateur-role { font-size: 13px; color: var(--color-secondary); display: block; margin-bottom: 16px; font-weight: 500; }
-    .formateur-info p { font-size: 14px; color: #4B5563; margin-bottom: 24px; }
-    .formateur-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .formateur-tags span { background-color: #ffffff; border: 1px solid var(--color-border); font-size: 11px; padding: 4px 10px; border-radius: 20px; color: #374151; }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-    /* ==========================================================================
-       7. BOUTIQUE (GRILLE ET CARTES)
-       ========================================================================== */
-    .produits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .product-card { border: 1px solid var(--color-border); border-radius: 4px; overflow: hidden; transition: var(--transition-smooth); }
-    .product-card:hover { transform: translateY(-4px); }
-    .product-img-placeholder { height: 220px; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid var(--color-border); }
-    .product-badge { position: absolute; top: 16px; left: 16px; background-color: white; border: 1px solid var(--color-dark); font-size: 10px; font-family: var(--font-mono); padding: 4px 10px; text-transform: uppercase; }
-    .prod-icon { width: 48px; height: 48px; color: rgba(0,0,0,0.15); }
-    .product-info { padding: 24px; }
-    .product-info h3 { font-family: var(--font-display); font-size: 20px; margin-bottom: 8px; }
-    .product-info p { font-size: 13px; color: #6B7280; height: 60px; overflow: hidden; margin-bottom: 20px; }
-    .product-footer { display: flex; align-items: center; justify-content: space-between; }
-    .product-price { font-family: var(--font-mono); font-weight: 700; color: var(--color-primary); }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--color-forest);
+      color: var(--color-white);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-playfair);
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
 
-    /* ==========================================================================
-       8. INTERFACE DU PANIER SIDEBAR
-       ========================================================================== */
-    .cart-sidebar { position: fixed; top: 0; right: 0; width: 420px; height: 100%; background-color: white; z-index: 120; padding: 40px; display: flex; flex-direction: column; transform: translateX(100%); transition: var(--transition-smooth); }
-    .cart-sidebar--active { transform: translateX(0); }
-    .cart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
-    .cart-header h2 { font-family: var(--font-display); font-size: 24px; display: flex; align-items: center; gap: 12px; }
-    .cart-close-btn { background: none; border: none; cursor: pointer; color: var(--color-dark); }
-    .cart-items-wrapper { flex: 1; overflow-y: auto; }
-    .cart-empty { text-align: center; padding: 40px 0; color: #9CA3AF; }
-    .cart-empty i { width: 48px; height: 48px; margin-bottom: 16px; }
-    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--color-border); }
-    .cart-item-details h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .cart-item-price { font-family: var(--font-mono); font-size: 13px; color: var(--color-secondary); }
-    .cart-item-actions { display: flex; align-items: center; gap: 12px; }
-    .qty-btn { background: none; border: 1px solid var(--color-border); width: 24px; height: 24px; cursor: pointer; }
-    .qty-val { font-family: var(--font-mono); font-size: 13px; }
-    .cart-footer { margin-top: auto; padding-top: 24px; }
-    .cart-total-line { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; margin-bottom: 24px; }
-    .cart-total-amount { color: var(--color-primary); }
-    .cart-footer .btn { margin-bottom: 12px; }
+    .logo-text {
+      font-family: var(--font-inter);
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--color-forest-dk);
+    }
 
-    /* ==========================================================================
-       9. MODALS, TOASTS & CONTACT
-       ========================================================================== */
-    .modal-overlay { position: fixed; inset: 0; background-color: rgba(17, 24, 39, 0.6); backdrop-filter: blur(4px); z-index: 200; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
-    .modal-overlay--active { opacity: 1; pointer-events: auto; }
-    .modal { background-color: white; padding: 48px; width: 100%; max-width: 500px; position: relative; border-radius: 4px; }
-    .modal-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; }
-    .modal-icon { color: var(--color-secondary); margin-bottom: 16px; }
-    .modal-title { font-family: var(--font-display); font-size: 28px; margin-bottom: 8px; }
-    .modal-sub { font-size: 14px; color: #6B7280; margin-bottom: 32px; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
-    .form-group input { width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: 4px; font-family: var(--font-sans); }
-    .form-error { font-size: 11px; color: var(--color-error); display: block; margin-top: 4px; }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
 
-    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .contact-infos { margin-top: 32px; }
-    .contact-item { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; color: var(--color-dark); text-decoration: none; }
-    .contact-item i { color: var(--color-secondary); }
-    .whatsapp-card { background-color: var(--color-light); border: 1px solid var(--color-border); padding: 40px; text-align: center; }
-    .wa-icon { width: 48px; height: 48px; color: #25D366; margin-bottom: 16px; }
-    .whatsapp-card h3 { font-family: var(--font-display); font-size: 22px; margin-bottom: 8px; }
-    .whatsapp-card p { font-size: 14px; color: #6B7280; margin-bottom: 24px; }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-slate);
+      transition: color var(--dur-fast);
+    }
 
-    .overlay { position: fixed; inset: 0; background-color: rgba(0,0,0,0.4); z-index: 80; opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
-    .overlay--active { opacity: 1; pointer-events: auto; }
-    
-    .toast { position: fixed; bottom: 24px; left: 24px; background-color: var(--color-dark); color: white; padding: 14px 24px; font-size: 14px; font-weight: 500; border-radius: 4px; z-index: 300; transform: translateY(100px); opacity: 0; transition: var(--transition-smooth); }
-    .toast--active { transform: translateY(0); opacity: 1; }
-    .footer { background-color: var(--color-dark); color: white; padding: 60px 0; text-align: center; }
-    .footer-brand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
-    .footer-brand .logo-mark { background-color: var(--color-secondary); }
-    .footer-tagline { font-family: var(--font-display); font-style: italic; color: #9CA3AF; margin-bottom: 24px; }
-    .footer-copy { font-size: 12px; color: #4B5563; }
+    .nav-links a:hover {
+      color: var(--color-forest);
+    }
 
-    /* ==========================================================================
-       10. MEDIA QUERIES (RESPONSIVE RESEAU MOBILE)
-       ========================================================================== */
-    @media (max-width: 968px) {
-      .hero { flex-direction: column; text-align: center; padding-top: 120px; justify-content: center; }
-      .hero-content { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
-      .hero-title { font-size: 46px; }
-      .hero-cta-group { justify-content: center; }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-btn {
+      position: relative;
+      cursor: pointer;
+      color: var(--color-forest);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-full);
+      background: rgba(26,77,46,0.04);
+      transition: background var(--dur-fast), color var(--dur-fast);
+    }
+
+    .cart-btn:hover {
+      background: var(--color-forest);
+      color: var(--color-white);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--color-gold);
+      color: var(--color-white);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      border-radius: var(--radius-full);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--color-white);
+    }
+
+    .cart-count.visible {
+      display: flex;
+    }
+
+    .burger-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-full);
+    }
+
+    .burger-btn span {
+      width: 20px;
+      height: 2px;
+      background: var(--color-forest-dk);
+      transition: transform var(--dur-fast), opacity var(--dur-fast);
+    }
+
+    .burger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger-btn.open span:nth-child(2) { opacity: 0; }
+    .burger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Menu mobile */
+    .mobile-menu {
+      position: fixed;
+      top: 73px;
+      left: 0;
+      width: 100%;
+      background: var(--color-white);
+      border-bottom: 1px solid rgba(26,77,46,0.06);
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: var(--shadow-md);
+      z-index: 99;
+    }
+
+    .mobile-link {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-forest-dk);
+      padding: 8px 0;
+    }
+
+    /* ─── 5. BADGE ROTATIF SIGNATURE ───────────────────────── */
+    .rotating-badge {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 90;
+      width: 120px;
+      height: 120px;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    .rotating-badge svg {
+      width: 100%;
+      height: 100%;
+      animation: rotateBadge 20s linear infinite;
+    }
+
+    @keyframes rotateBadge {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ─── 6. HERO SECTION ──────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background-color: var(--color-cream);
+      display: flex;
+      align-items: center;
+      padding: 140px 0 80px;
+      overflow: hidden;
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+      margin-left: max(24px, calc((100vw - var(--container-max)) / 2 + 24px));
+      padding-right: 24px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-forest);
+      background: rgba(26,77,46,0.05);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow i {
+      width: 14px;
+      height: 14px;
+      color: var(--color-gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-playfair);
+      font-size: 4.2rem;
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--color-forest-dk);
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--color-slate-lt);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    /* Stats */
+    .hero-stats {
+      display: inline-flex;
+      align-items: center;
+      background: var(--color-white);
+      padding: 24px 32px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(26,77,46,0.04);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-family: var(--font-playfair);
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--color-forest);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--color-slate-lt);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(26,77,46,0.1);
+      margin: 0 32px;
+    }
+
+    /* Visuel Hero */
+    .hero-visual {
+      position: absolute;
+      right: -10%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50vw;
+      height: 50vw;
+      max-width: 650px;
+      max-height: 650px;
+      z-index: 1;
+    }
+
+    .hero-blob {
+      width: 100%;
+      height: 100%;
+      background: rgba(200,146,42,0.06);
+      border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+      animation: blobMorph 12s ease-in-out infinite alternate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .blob-inner {
+      width: 70%;
+      height: 70%;
+      background: var(--color-forest);
+      border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+      animation: blobMorph 8s ease-in-out infinite alternate-reverse;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .blob-icon {
+      width: 80px;
+      height: 80px;
+      color: var(--color-cream);
+      opacity: 0.25;
+    }
+
+    @keyframes blobMorph {
+      0% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+      100% { border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%; }
+    }
+
+    /* ─── 7. SECTION FORMATION ────────────────────────────── */
+    .formation-section {
+      background: var(--color-white);
+    }
+
+    .formation-banner {
+      background: var(--color-cream);
+      border-radius: var(--radius-lg);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 56px;
+      border: 1px solid rgba(26,77,46,0.04);
+    }
+
+    .banner-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .banner-item i {
+      width: 28px;
+      height: 28px;
+      color: var(--color-forest);
+    }
+
+    .banner-label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--color-slate-lt);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .banner-item strong {
+      font-size: 1.15rem;
+      color: var(--color-forest-dk);
+      font-weight: 600;
+    }
+
+    .banner-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(26,77,46,0.1);
+      margin: 0 40px;
+    }
+
+    /* Grille des modules */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 56px;
+    }
+
+    .module-card {
+      background: var(--color-white);
+      border: 1px solid rgba(26,77,46,0.08);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .module-card--practice {
+      background: var(--color-cream);
+      border-color: transparent;
+    }
+
+    .module-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      border-bottom: 1px solid rgba(26,77,46,0.06);
+      padding-bottom: 16px;
+    }
+
+    .module-header h3 {
+      font-family: var(--font-playfair);
+      font-size: 1.4rem;
+      color: var(--color-forest-dk);
+    }
+
+    .module-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+    }
+
+    .module-tag--theory {
+      background: rgba(200,146,42,0.08);
+      color: var(--color-gold);
+    }
+
+    .module-tag--practice {
+      background: rgba(26,77,46,0.08);
+      color: var(--color-forest);
+    }
+
+    .module-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .module-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 0.95rem;
+    }
+
+    .module-num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-gold);
+      background: var(--color-cream);
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .module-card--practice .module-num {
+      background: var(--color-white);
+      color: var(--color-forest);
+    }
+
+    .formation-cta {
+      text-align: center;
+    }
+
+    .cta-note {
+      font-size: 0.8rem;
+      color: var(--color-slate-lt);
+      margin-top: 12px;
+    }
+
+    /* ─── 8. SECTION ÉQUIPE ───────────────────────────────── */
+    .equipe-section {
+      background: var(--color-cream);
+    }
+
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .formateur-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(26,77,46,0.04);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .formateur-card--featured {
+      border: 2px solid var(--color-forest);
+      transform: scale(1.03);
+      z-index: 2;
+    }
+
+    .formateur-featured-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-forest);
+      color: var(--color-white);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.05em;
+    }
+
+    .formateur-avatar {
+      width: 64px;
+      height: 64px;
+      background: var(--color-cream);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-playfair);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-forest);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -4px;
+      border: 1px dashed rgba(26,77,46,0.2);
+      border-radius: var(--radius-full);
+    }
+
+    .formateur-info h3 {
+      font-family: var(--font-inter);
+      font-size: 1.2rem;
+      color: var(--color-forest-dk);
+      margin-bottom: 4px;
+    }
+
+    .formateur-role {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .formateur-info p {
+      font-size: 0.9rem;
+      color: var(--color-slate-lt);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .formateur-tags {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .formateur-tags span {
+      font-size: 0.75rem;
+      background: var(--color-cream);
+      color: var(--color-slate);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    /* ─── 9. SECTION BOUTIQUE (E-BOUTIQUE) ────────────────── */
+    .boutique-section {
+      background: var(--color-white);
+    }
+
+    .produits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    /* Structure issue de la génération dynamique du catalogue */
+    .produit-card {
+      background: var(--color-cream);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(26,77,46,0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--dur-mid) var(--ease), box-shadow var(--dur-mid) var(--ease);
+    }
+
+    .produit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .produit-img {
+      height: 160px;
+      background: linear-gradient(135deg, #1A4D2E 0%, #122E1D 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .produit-img i {
+      width: 56px;
+      height: 56px;
+    }
+
+    .produit-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      color: var(--color-white);
+      font-weight: 500;
+    }
+
+    .produit-badge--new { background: var(--color-gold); }
+    .produit-badge--hot { background: #E53E3E; }
+
+    .produit-img-label {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+    }
+
+    .produit-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .produit-name {
+      font-size: 1.15rem;
+      color: var(--color-forest-dk);
+      font-weight: 600;
+    }
+
+    .produit-desc {
+      font-size: 0.88rem;
+      color: var(--color-slate-lt);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .produit-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(26,77,46,0.06);
+    }
+
+    .produit-prix {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--color-forest);
+    }
+
+    /* ─── 10. SECTION CONTACT ──────────────────────────────── */
+    .contact-section {
+      background: var(--color-white);
+      padding-bottom: 0;
+    }
+
+    .contact-inner {
+      background: var(--color-forest-dk);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 64px;
+      color: var(--color-white);
+    }
+
+    .contact-text .section-title {
+      color: var(--color-white);
+    }
+
+    .contact-text p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .contact-infos {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+    }
+
+    .contact-item i {
+      width: 24px;
+      height: 24px;
+      color: var(--color-gold);
+    }
+
+    .whatsapp-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .wa-icon {
+      width: 48px;
+      height: 48px;
+      color: #25D366;
+      margin-bottom: 16px;
+    }
+
+    .whatsapp-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .whatsapp-card p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    /* ─── 11. FOOTER ───────────────────────────────────────── */
+    .footer {
+      background: #0B1C12;
+      padding: 40px 0;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+
+    .footer .logo-text {
+      color: var(--color-white);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ─── 12. PANIER SIDEBAR ────────────────────────────────── */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 100%;
+      max-width: 400px;
+      height: 100vh;
+      background: var(--color-white);
+      box-shadow: var(--shadow-lg);
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      transition: right var(--dur-mid) var(--ease);
+    }
+
+    .cart-sidebar.open {
+      right: 0;
+    }
+
+    .cart-header {
+      padding: 24px;
+      border-bottom: 1px solid rgba(26,77,46,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-header h2 {
+      font-size: 1.2rem;
+      color: var(--color-forest-dk);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-close-btn {
+      cursor: pointer;
+      color: var(--color-slate-lt);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-full);
+    }
+
+    .cart-close-btn:hover {
+      background: var(--color-cream);
+      color: var(--color-forest-dk);
+    }
+
+    .cart-items-wrapper {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    /* Items panier */
+    .cart-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(26,77,46,0.06);
+      align-items: center;
+    }
+
+    .cart-item-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--color-cream);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-forest);
+      flex-shrink: 0;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-forest-dk);
+    }
+
+    .cart-item-price {
+      font-size: 0.8rem;
+      color: var(--color-slate-lt);
+      margin-bottom: 6px;
+    }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(26,77,46,0.15);
+      border-radius: var(--radius-sm);
+      width: fit-content;
+      background: var(--color-white);
+    }
+
+    .qty-btn {
+      padding: 2px 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--color-slate-lt);
+      cursor: pointer;
+    }
+
+    .qty-value {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 0 4px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .cart-item-delete {
+      color: #E53E3E;
+      cursor: pointer;
+      opacity: 0.6;
+      padding: 8px;
+    }
+
+    .cart-item-delete:hover { opacity: 1; }
+
+    .cart-empty {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--color-slate-lt);
+    }
+
+    .cart-empty i {
+      width: 48px;
+      height: 48px;
+      opacity: 0.3;
+      margin-bottom: 12px;
+    }
+
+    /* Footer panier */
+    .cart-footer {
+      padding: 24px;
+      border-top: 1px solid rgba(26,77,46,0.06);
+      background: var(--color-cream);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-total-line {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--color-forest-dk);
+      margin-bottom: 8px;
+    }
+
+    .cart-total-amount {
+      font-family: var(--font-mono);
+      color: var(--color-forest);
+    }
+
+    /* ─── 13. MODAL INSCRIPTION ────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(18,46,29,0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 150;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dur-fast) var(--ease);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 460px;
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform var(--dur-mid) var(--ease);
+    }
+
+    .modal-overlay.open .modal {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      color: var(--color-slate-lt);
+      cursor: pointer;
+    }
+
+    .modal-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(26,77,46,0.05);
+      color: var(--color-forest);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-family: var(--font-playfair);
+      font-size: 1.8rem;
+      color: var(--color-forest-dk);
+      margin-bottom: 8px;
+    }
+
+    .modal-sub {
+      font-size: 0.9rem;
+      color: var(--color-slate-lt);
+      margin-bottom: 24px;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-slate);
+    }
+
+    .form-group input {
+      background: var(--color-cream);
+      border: 1px solid rgba(26,77,46,0.08);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      color: var(--color-forest-dk);
+      transition: border-color var(--dur-fast);
+      width: 100%;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-forest);
+    }
+
+    .form-group input.error {
+      border-color: #E53E3E;
+    }
+
+    .form-error {
+      font-size: 0.75rem;
+      color: #E53E3E;
+      min-height: 16px;
+    }
+
+    /* ─── 14. COMPOSANTS PARTAGÉS (BOUTONS, OVERLAY, TOAST) ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background var(--dur-fast), transform var(--dur-fast), color var(--dur-fast);
+    }
+
+    .btn-large { padding: 16px 36px; font-size: 1.05rem; }
+    .btn-full { width: 100%; }
+
+    .btn-primary {
+      background: var(--color-forest);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-forest-dk);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-forest);
+      border: 1px solid rgba(26,77,46,0.2);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(26,77,46,0.04);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-slate-lt);
+      border: 1px solid rgba(26,77,46,0.1);
+    }
+
+    .btn-outline:hover { background: rgba(26,77,46,0.02); }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: var(--color-white);
+    }
+
+    .btn-whatsapp:hover { background: #20BA5A; }
+
+    /* Overlay global d'arrière-plan */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(18,46,29,0.3);
+      z-index: 110;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dur-fast) var(--ease);
+    }
+
+    .overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Notifications Toast */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      background: var(--color-forest-dk);
+      color: var(--color-white);
+      padding: 14px 24px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      z-index: 200;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform var(--dur-mid) var(--ease), opacity var(--dur-mid) var(--ease);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ─── 15. SYSTEM ANIMATIONS (REVEAL ON SCROLL) ────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── 16. MEDIA QUERIES MOBILE & TABLETTE ──────────────── */
+    @media (max-width: 992px) {
+      .hero-title { font-size: 3.2rem; }
       .hero-visual { display: none; }
-      .modules-grid, .equipe-grid, .produits-grid, .contact-inner { grid-template-columns: 1fr; gap: 24px; }
-      .formation-banner { flex-direction: column; gap: 20px; align-items: flex-start; }
-      .banner-divider { width: 100%; height: 1px; }
-      .nav-links { display: none; }
-      .burger-btn { display: flex; }
+      .hero-content { margin-left: 0; }
+      .equipe-grid { grid-template-columns: 1fr; gap: 40px; }
+      .formateur-card--featured { transform: none; }
+      .produits-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; padding: 40px; gap: 40px; }
     }
-    @media (max-width: 480px) {
-      .cart-sidebar { width: 100%; padding: 24px; }
-      .modal { padding: 24px; }
-      .hero-title { font-size: 36px; }
-      .hero-cta-group { flex-direction: column; width: 100%; }
-      .hero-cta-group .btn { width: 100%; }
-      .rotating-badge { display: none; }
+
+    @media (max-width: 768px) {
+      :root { --section-py: 56px; }
+
+      /* Navbar */
+      .nav-links   { display: none; }
+      .burger-btn  { display: flex; }
+      .mobile-menu.open { display: flex; }
+
+      /* Modules */
+      .modules-grid { grid-template-columns: 1fr; }
+
+      /* Boutique */
+      .produits-grid { grid-template-columns: 1fr; }
+
+      /* Bannière formation */
+      .formation-banner {
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px;
+      }
+      .banner-divider {
+        width: 60px;
+        height: 1px;
+        margin: 0;
+      }
+
+      /* Hero stats */
+      .hero-stats {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+        width: 100%;
+      }
+      .stat-divider { width: 60px; height: 1px; margin: 0; }
+
+      /* Badge */
+      .rotating-badge { width: 90px; height: 90px; bottom: 16px; right: 16px; }
     }
   </style>
 </head>
@@ -279,26 +1383,29 @@
 
   <header class="navbar" id="navbar">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo" aria-label="AVA CORP">
+      <a href="#hero" class="nav-logo" aria-label="AVA CORP – Accueil">
         <span class="logo-mark">A</span>
         <span class="logo-text">AVA <strong>CORP</strong></span>
       </a>
+
       <nav class="nav-links" aria-label="Navigation principale">
         <a href="#formation">Formation</a>
         <a href="#equipe">Équipe</a>
         <a href="#boutique">Boutique</a>
         <a href="#contact">Contact</a>
       </nav>
+
       <div class="nav-actions">
         <button class="cart-btn" id="cartToggle" aria-label="Ouvrir le panier">
           <i data-lucide="shopping-basket"></i>
           <span class="cart-count" id="cartCount">0</span>
         </button>
-        <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+        <button class="burger-btn" id="burgerBtn" aria-label="Menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
+
     <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
       <a href="#formation" class="mobile-link">Formation FOSS</a>
       <a href="#equipe" class="mobile-link">Notre Équipe</a>
@@ -308,12 +1415,17 @@
   </header>
 
   <main>
+
     <section class="hero" id="hero">
       <div class="hero-pattern" aria-hidden="true">
-        <svg width="100%" height="100%">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="organicGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
               <circle cx="30" cy="30" r="1.5" fill="rgba(200,146,42,0.18)" />
+              <circle cx="0" cy="0" r="1" fill="rgba(200,146,42,0.10)" />
+              <circle cx="60" cy="0" r="1" fill="rgba(200,146,42,0.10)" />
+              <circle cx="0" cy="60" r="1" fill="rgba(200,146,42,0.10)" />
+              <circle cx="60" cy="60" r="1" fill="rgba(200,146,42,0.10)" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#organicGrid)" />
@@ -321,138 +1433,290 @@
       </div>
 
       <div class="hero-content">
-        <span class="hero-eyebrow"><i data-lucide="leaf"></i> Projet Agropastoral · Cameroun 2025</span>
-        <h1 class="hero-title">L'élevage de<br /><em>hannetons,</em><br />la nouvelle<br />agriculture.</h1>
-        <p class="hero-sub">AVA CORP lance le <strong>Projet FOSS</strong> — une formation pratique et théorique pour maîtriser l'élevage de hannetons au Cameroun. Préparez l'avenir dès le <strong>Samedi 22 Novembre</strong>.</p>
+        <span class="hero-eyebrow">
+          <i data-lucide="leaf"></i>
+          Projet Agropastoral · Cameroun 2025
+        </span>
+
+        <h1 class="hero-title">
+          L'élevage de<br />
+          <em>hannetons,</em><br />
+          la nouvelle<br />
+          agriculture.
+        </h1>
+
+        <p class="hero-sub">
+          AVA CORP lance le <strong>Projet FOSS</strong> — une formation pratique et théorique
+          pour maîtriser l'élevage de hannetons au Cameroun.
+          Inscrivez-vous dès maintenant pour le <strong>Samedi 22 Novembre</strong>.
+        </p>
+
         <div class="hero-cta-group">
-          <button class="btn btn-primary" id="heroInscriptionBtn"><i data-lucide="arrow-right"></i> S'inscrire à la formation</button>
-          <a href="#boutique" class="btn btn-ghost">Voir la boutique</a>
+          <button class="btn btn-primary" id="heroInscriptionBtn">
+            <i data-lucide="arrow-right"></i>
+            S'inscrire à la formation
+          </button>
+          <a href="#boutique" class="btn btn-ghost">
+            Voir la boutique
+          </a>
         </div>
+
         <div class="hero-stats">
-          <div class="stat"><span class="stat-value">5 000</span><span class="stat-label">FCFA Inscription</span></div>
+          <div class="stat">
+            <span class="stat-value">5 000</span>
+            <span class="stat-label">FCFA inscription</span>
+          </div>
           <div class="stat-divider"></div>
-          <div class="stat"><span class="stat-value">8</span><span class="stat-label">Modules</span></div>
+          <div class="stat">
+            <span class="stat-value">8</span>
+            <span class="stat-label">Modules</span>
+          </div>
           <div class="stat-divider"></div>
-          <div class="stat"><span class="stat-value">3</span><span class="stat-label">Experts formateurs</span></div>
+          <div class="stat">
+            <span class="stat-value">3</span>
+            <span class="stat-label">Experts formateurs</span>
+          </div>
         </div>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
-        <div class="hero-blob"><div class="blob-inner"><i data-lucide="bug" class="blob-icon"></i></div></div>
+        <div class="hero-blob">
+          <div class="blob-inner">
+            <i data-lucide="bug" class="blob-icon"></i>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section formation-section" id="formation">
       <div class="container">
+
         <div class="section-header">
           <span class="section-eyebrow">Formation Certifiante</span>
           <h2 class="section-title">Projet FOSS<br /><em>Élevage de Hannetons</em></h2>
-          <p class="section-desc">Une formation complète alliant théorie et pratique pour vous rendre autonome dans la production de hannetons destinés au marché.</p>
+          <p class="section-desc">
+            Une formation complète alliant théorie et pratique pour vous rendre
+            autonome dans la production de hannetons destinés à l'alimentation animale.
+          </p>
         </div>
 
         <div class="formation-banner">
-          <div class="banner-item"><i data-lucide="calendar-days"></i><div><span class="banner-label">Date</span>document.getElementById<strong>Samedi 22 Novembre</strong></div></div>
+          <div class="banner-item">
+            <i data-lucide="calendar-days"></i>
+            <div>
+              <span class="banner-label">Date</span>
+              <strong>Samedi 22 Novembre</strong>
+            </div>
+          </div>
           <div class="banner-divider"></div>
-          <div class="banner-item"><i data-lucide="ticket"></i><div><span class="banner-label">Inscriptions</span><strong>5 000 FCFA</strong></div></div>
+          <div class="banner-item">
+            <i data-lucide="ticket"></i>
+            <div>
+              <span class="banner-label">Inscription</span>
+              <strong>5 000 FCFA</strong>
+            </div>
+          </div>
           <div class="banner-divider"></div>
-          <div class="banner-item"><i data-lucide="graduation-cap"></i><div><span class="banner-label">Frais Universels</span><strong>20 000 FCFA</strong></div></div>
+          <div class="banner-item">
+            <i data-lucide="graduation-cap"></i>
+            <div>
+              <span class="banner-label">Frais de formation</span>
+              <strong>20 000 FCFA</strong>
+            </div>
+          </div>
         </div>
 
         <div class="modules-grid">
+
           <div class="module-card">
-            <div class="module-header"><span class="module-tag module-tag--theory">Théorie</span><h3>Modules Théoriques</h3></div>
+            <div class="module-header">
+              <span class="module-tag module-tag--theory">Théorie</span>
+              <h3>Modules Théoriques</h3>
+            </div>
             <ul class="module-list">
-              <li><span class="module-num">01</span><span>Production de hannetons</span></li>
-              <li><span class="module-num">02</span><span>Cycle vital & biologie</span></li>
-              <li><span class="module-num">03</span><span>Phases de métamorphose</span></li>
-              <li><span class="module-num">04</span><span>Processus d'éclosions</span></li>
-              <li><span class="module-num">05</span><span>Types de substrats</span></li>
+              <li>
+                <span class="module-num">01</span>
+                <span>Production de hannetons</span>
+              </li>
+              <li>
+                <span class="module-num">02</span>
+                <span>Cycle vital & biologie</span>
+              </li>
+              <li>
+                <span class="module-num">03</span>
+                <span>Phases de métamorphose</span>
+              </li>
+              <li>
+                <span class="module-num">04</span>
+                <span>Processus d'éclosions</span>
+              </li>
+              <li>
+                <span class="module-num">05</span>
+                <span>Types de substrats</span>
+              </li>
             </ul>
           </div>
+
           <div class="module-card module-card--practice">
-            <div class="module-header"><span class="module-tag module-tag--practice">Pratique</span><h3>Modules Pratiques</h3></div>
+            <div class="module-header">
+              <span class="module-tag module-tag--practice">Pratique</span>
+              <h3>Modules Pratiques</h3>
+            </div>
             <ul class="module-list">
-              <li><span class="module-num">06</span><span>Calcul des quantités de substrats</span></li>
-              <li><span class="module-num">07</span><span>Techniques de sexage</span></li>
-              <li><span class="module-num">08</span><span>Mise en place des bacs d'élevage</span></li>
+              <li>
+                <span class="module-num">06</span>
+                <span>Calcul des quantités de substrats</span>
+              </li>
+              <li>
+                <span class="module-num">07</span>
+                <span>Techniques de sexage</span>
+              </li>
+              <li>
+                <span class="module-num">08</span>
+                <span>Mise en place des bacs d'élevage</span>
+              </li>
             </ul>
           </div>
+
         </div>
 
         <div class="formation-cta">
-          <button class="btn btn-primary btn-large" id="formationInscriptionBtn2"><i data-lucide="message-circle"></i> S'inscrire via WhatsApp</button>
-          <p class="cta-note">Places limitées · Accompagnement garanti</p>
+          <button class="btn btn-primary btn-large" id="formationInscriptionBtn">
+            <i data-lucide="message-circle"></i>
+            S'inscrire à la formation
+          </button>
+          <p class="cta-note">Réponse garantie sous 24h · Places limitées</p>
         </div>
+
       </div>
     </section>
 
-    <div class="modal-overlay" id="inscriptionModal" role="dialog" aria-modal="true">
+    <div class="modal-overlay" id="inscriptionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal">
-        <button class="modal-close" id="modalClose"><i data-lucide="x"></i></button>
-        <div class="modal-icon"><i data-lucide="graduation-cap"></i></div>
-        <h2 class="modal-title">Inscription – Projet FOSS</h2>
-        <p class="modal-sub">Remplissez vos accès pour que l'équipe valide votre place.</p>
+        <button class="modal-close" id="modalClose" aria-label="Fermer">
+          <i data-lucide="x"></i>
+        </button>
+        <div class="modal-icon">
+          <i data-lucide="graduation-cap"></i>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Inscription – Projet FOSS</h2>
+        <p class="modal-sub">Remplissez ce formulaire pour vous inscrire à la formation du 22 Novembre.</p>
+
         <div class="modal-form">
           <div class="form-group">
             <label for="inscNom">Nom complet *</label>
-            <input type="text" id="inscNom" placeholder="Ex: Jean-Baptiste MBOCK" />
+            <input type="text" id="inscNom" placeholder="Ex: Jean-Baptiste MBOCK" autocomplete="name" />
             <span class="form-error" id="errNom"></span>
           </div>
           <div class="form-group">
-            <label for="inscTel">Numéro WhatsApp *</label>
-            <input type="tel" id="inscTel" placeholder="Ex: 6XXXXXXXX" />
+            <label for="inscTel">Numéro de téléphone *</label>
+            <input type="tel" id="inscTel" placeholder="Ex: 6XXXXXXXX" autocomplete="tel" />
             <span class="form-error" id="errTel"></span>
           </div>
           <div class="form-group">
             <label for="inscVille">Ville de résidence *</label>
-            <input type="text" id="inscVille" placeholder="Ex: Yaoundé, Douala..." />
+            <input type="text" id="inscVille" placeholder="Ex: Yaoundé, Douala..." autocomplete="address-level2" />
             <span class="form-error" id="errVille"></span>
           </div>
-          <button class="btn btn-primary btn-full" id="submitInscription"><i data-lucide="send"></i> Envoyer via WhatsApp</button>
+          <button class="btn btn-primary btn-full" id="submitInscription">
+            <i data-lucide="send"></i>
+            Envoyer via WhatsApp
+          </button>
         </div>
       </div>
     </div>
 
     <section class="section equipe-section" id="equipe">
       <div class="container">
+
         <div class="section-header">
           <span class="section-eyebrow">Nos Experts</span>
           <h2 class="section-title">Rencontrez<br /><em>l'équipe de formateurs</em></h2>
+          <p class="section-desc">
+            Des professionnels de terrain alliant expertise académique et
+            expérience pratique dans le domaine agropastoral camerounais.
+          </p>
         </div>
+
         <div class="equipe-grid">
+
           <div class="formateur-card">
-            <div class="formateur-avatar" data-initials="AA"><div class="avatar-ring"></div></div>
+            <div class="formateur-avatar" data-initials="AA">
+              <div class="avatar-ring"></div>
+            </div>
             <div class="formateur-info">
-              <h3>M. ABANE ABANE</h3><span class="formateur-role">Ingénieur Agropastoral</span>
-              <p>Spécialiste en production animale intensive. Concepteur en chef du programme FOSS.</p>
+              <h3>M. ABANE ABANE</h3>
+              <span class="formateur-role">Ingénieur Agropastoral</span>
+              <p>
+                Spécialiste en production animale et systèmes d'élevage intensif.
+                Pilote du Projet FOSS et concepteur du programme de formation.
+              </p>
+            </div>
+            <div class="formateur-tags">
+              <span>Production animale</span>
+              <span>Élevage intensif</span>
+              <span>FOSS</span>
             </div>
           </div>
+
           <div class="formateur-card formateur-card--featured">
-            <div class="formateur-featured-badge">Directeur Pédagogique</div>
-            <div class="formateur-avatar" data-initials="FA"><div class="avatar-ring"></div></div>
+            <div class="formateur-featured-badge">Directeur pédagogique</div>
+            <div class="formateur-avatar" data-initials="FA">
+              <div class="avatar-ring"></div>
+            </div>
             <div class="formateur-info">
-              <h3>Franck AVA</h3><span class="formateur-role">Enseignant & Physiologiste</span>
-              <p>Expert en physiologie biologique animale et vulgarisation des techniques agropastorales.</p>
+              <h3>Franck AVA</h3>
+              <span class="formateur-role">Enseignant & Physiologiste</span>
+              <p>
+                Expert en physiologie animale et pédagogie appliquée.
+                Responsable des modules théoriques sur le cycle vital et la métamorphose.
+              </p>
+            </div>
+            <div class="formateur-tags">
+              <span>Physiologie</span>
+              <span>Pédagogie</span>
+              <span>Biologie</span>
             </div>
           </div>
+
           <div class="formateur-card">
-            <div class="formateur-avatar" data-initials="MK"><div class="avatar-ring"></div></div>
+            <div class="formateur-avatar" data-initials="MK">
+              <div class="avatar-ring"></div>
+            </div>
             <div class="formateur-info">
-              <h3>Mlle KANA</h3><span class="formateur-role">Ingénieur Technologies Agropastorales</span>
-              <p>Spécialiste des substrats organiques et de la gestion de l'hygrométrie des bacs.</p>
+              <h3>Mlle KANA</h3>
+              <span class="formateur-role">Ingénieur Technologies Agropastorales</span>
+              <p>
+                Spécialiste des technologies appliquées à l'agriculture moderne.
+                En charge des modules pratiques sur les substrats et le sexage.
+              </p>
+            </div>
+            <div class="formateur-tags">
+              <span>Agro-technologie</span>
+              <span>Substrats</span>
+              <span>Pratique</span>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
     <section class="section boutique-section" id="boutique">
       <div class="container">
+
         <div class="section-header">
           <span class="section-eyebrow">E-Boutique AVA CORP</span>
           <h2 class="section-title">Équipez-vous<br /><em>pour réussir</em></h2>
+          <p class="section-desc">
+            Tous les équipements et intrants nécessaires pour démarrer votre
+            élevage de hannetons dans les meilleures conditions.
+          </p>
         </div>
-        <div class="produits-grid" id="produitsGrid"></div>
+
+        <div class="produits-grid" id="produitsGrid">
+          </div>
+
       </div>
     </section>
 
@@ -462,195 +1726,605 @@
           <div class="contact-text">
             <span class="section-eyebrow">Nous contacter</span>
             <h2 class="section-title">Une question ?<br /><em>Écrivez-nous.</em></h2>
+            <p>
+              Notre équipe est disponible pour répondre à toutes vos questions
+              sur la formation, les produits ou le Projet FOSS.
+            </p>
             <div class="contact-infos">
-              <a href="https://wa.me/237697270262" target="_blank" class="contact-item"><i data-lucide="message-circle"></i><span>+237 697 270 262</span></a>
-              <div class="contact-item"><i data-lucide="map-pin"></i><span>Yaoundé, Cameroun</span></div>
+              <a href="https://wa.me/237697270262" target="_blank" rel="noopener" class="contact-item">
+                <i data-lucide="message-circle"></i>
+                <span>+237 697 270 262</span>
+              </a>
+              <div class="contact-item">
+                <i data-lucide="map-pin"></i>
+                <span>Yaoundé, Cameroun</span>
+              </div>
             </div>
           </div>
           <div class="contact-cta-block">
             <div class="whatsapp-card">
               <i data-lucide="message-circle" class="wa-icon"></i>
-              <h3>Support WhatsApp Actif</h3>
-              <a href="https://wa.me/237697270262?text=Bonjour%20AVA%20CORP" target="_blank" class="btn btn-whatsapp"><i data-lucide="message-circle"></i> Ouvrir WhatsApp</a>
+              <h3>Discutons sur WhatsApp</h3>
+              <p>Posez vos questions directement à un expert AVA CORP.</p>
+              <a href="https://wa.me/237697270262?text=Bonjour%20AVA%20CORP%2C%20j%27ai%20une%20question%20concernant%20le%20Projet%20FOSS." target="_blank" rel="noopener" class="btn btn-whatsapp">
+                <i data-lucide="message-circle"></i>
+                Ouvrir WhatsApp
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
-    <div class="container">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark">A</span>
+        <span class="logo-text">AVA <strong>CORP</strong></span>
+      </div>
       <p class="footer-tagline">Innover pour une agriculture africaine durable.</p>
-      <p class="footer-copy">&copy; 2026 AVA CORP. Tous droits réservés. · Projet FOSS · Cameroun</p>
+      <p class="footer-copy">&copy; 2025 AVA CORP. Tous droits réservés. · Projet FOSS · Cameroun</p>
     </div>
   </footer>
 
-  <aside class="cart-sidebar" id="cartSidebar">
+  <aside class="cart-sidebar" id="cartSidebar" aria-label="Panier d'achat" aria-hidden="true">
     <div class="cart-header">
       <h2><i data-lucide="shopping-basket"></i> Votre panier</h2>
-      <button class="cart-close-btn" id="cartClose"><i data-lucide="x"></i></button>
+      <button class="cart-close-btn" id="cartClose" aria-label="Fermer le panier">
+        <i data-lucide="x"></i>
+      </button>
     </div>
-    <div class="cart-items-wrapper" id="cartItemsWrapper"></div>
+
+    <div class="cart-items-wrapper" id="cartItemsWrapper">
+      </div>
+
     <div class="cart-footer" id="cartFooter">
-      <div class="cart-total-line"><span>Total</span><span class="cart-total-amount" id="cartTotal">0 FCFA</span></div>
-      <button class="btn btn-whatsapp btn-full" id="validateCartBtn"><i data-lucide="message-circle"></i> Valider sur WhatsApp</button>
-      <button class="btn btn-outline btn-full" id="clearCartBtn"><i data-lucide="trash-2"></i> Vider</button>
+      <div class="cart-total-line">
+        <span>Total</span>
+        <span class="cart-total-amount" id="cartTotal">0 FCFA</span>
+      </div>
+      <button class="btn btn-whatsapp btn-full" id="validateCartBtn">
+        <i data-lucide="message-circle"></i>
+        Valider la commande sur WhatsApp
+      </button>
+      <button class="btn btn-outline btn-full" id="clearCartBtn">
+        <i data-lucide="trash-2"></i>
+        Vider le panier
+      </button>
     </div>
   </aside>
 
   <div class="overlay" id="overlay"></div>
-  <div class="toast" id="toast"></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const PRODUITS = [
-      { id: "p1", name: "Kit de Démarrage FOSS", price: 35000, desc: "Comprend 2 bacs d'élevage, substrat de base et guide d'éclosion.", tag: "Idéal Débutant" },
-      { id: "p2", name: "Substrat Enrichi (Sac 25kg)", price: 12000, desc: "Mélange organique testé en laboratoire pour accélérer la métamorphose.", tag: "Premium" },
-      { id: "p3", name: "Bac d'Élevage Modulaire", price: 8500, desc: "Bac équipé de grilles d'aération millimétrées anti-évasion.", tag: "Équipement" }
+    'use strict';
+
+    /* ─────────────────────────────────────────────────────────
+       1. CONFIG & DONNÉES
+       ───────────────────────────────────────────────────────── */
+    const WA_NUMBER = '237697270262';
+    const CART_STORAGE_KEY = 'avacorp_cart_v1';
+
+    const CATALOGUE = [
+      {
+        id: 'kit-foss-starter',
+        name: 'Kit de démarrage FOSS',
+        desc: 'Tout le nécessaire pour lancer votre premier cycle d\'élevage : guide technique, fiche de suivi et matériel de base.',
+        prix: 15000,
+        icon: 'package-2',
+        badge: 'Nouveau',
+        badgeType: 'new',
+      },
+      {
+        id: 'substrat-enrichi-5kg',
+        name: 'Sac de substrat enrichi 5 kg',
+        desc: 'Substrat organique certifié, riche en matière humique, conçu pour optimiser l\'éclosion et le développement larvaire.',
+        prix: 8500,
+        icon: 'layers',
+        badge: 'Best-seller',
+        badgeType: 'hot',
+      },
+      {
+        id: 'bac-elevage-standard',
+        name: 'Bac d\'élevage standard',
+        desc: 'Bac en PEHD 40 L avec couvercle grillagé anti-fugue, résistant aux UV et facile à désinfecter. Idéal débutant.',
+        prix: 12000,
+        icon: 'box',
+        badge: null,
+        badgeType: null,
+      }
     ];
 
-    const WHATSAPP_NUM = "237697270262";
-    let panier = JSON.parse(localStorage.getItem('ava_cart')) || [];
+    /* ─────────────────────────────────────────────────────────
+       2. UTILITAIRES
+       ───────────────────────────────────────────────────────── */
+    const $ = (sel, ctx = document) => ctx.querySelector(sel);
 
-    document.addEventListener("DOMContentLoaded", () => {
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-      
-      // Elements Dom
-      const burgerBtn = document.getElementById("burgerBtn");
-      const mobileMenu = document.getElementById("mobileMenu");
-      const overlay = document.getElementById("overlay");
-      const navbar = document.getElementById("navbar");
-      const cartToggle = document.getElementById("cartToggle");
-      const cartClose = document.getElementById("cartClose");
-      const cartSidebar = document.getElementById("cartSidebar");
-      const grid = document.getElementById("produitsGrid");
-      
-      // Sticky scroll navbar
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) navbar.classList.add("navbar--sticky");
-        else navbar.classList.remove("navbar--sticky");
-      });
+    const formatFCFA = (montant) => `${montant.toLocaleString('fr-FR')} FCFA`;
 
-      // Burger Menu
-      burgerBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("mobile-menu--active");
-        overlay.classList.toggle("overlay--active");
-      });
+    const buildWaUrl = (msg) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 
-      // Panier Sidebar Toggle
-      const toggleCart = () => {
-        cartSidebar.classList.toggle("cart-sidebar--active");
-        overlay.classList.toggle("overlay--active");
-      };
-      cartToggle.addEventListener("click", toggleCart);
-      cartClose.addEventListener("click", toggleCart);
-      overlay.addEventListener("click", () => {
-        cartSidebar.classList.remove("cart-sidebar--active");
-        mobileMenu.classList.remove("mobile-menu--active");
-        overlay.classList.remove("overlay--active");
-      });
+    const showToast = (message, duree = 3000) => {
+      const toast = $('#toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove('show'), duree);
+    };
 
-      // Initialisation de la boutique
-      grid.innerHTML = PRODUITS.map(p => `
-        <div class="product-card">
-          <div class="product-img-placeholder">
-            <span class="product-badge">${p.tag}</span><i data-lucide="package" class="prod-icon"></i>
+    /* ─────────────────────────────────────────────────────────
+       3. CATALOGUE PRODUITS – Génération dynamique
+       ───────────────────────────────────────────────────────── */
+    const genererCarteProduit = (produit) => {
+      const badgeHtml = produit.badge
+        ? `<span class="produit-badge produit-badge--${produit.badgeType}">${produit.badge}</span>`
+        : '';
+
+      return `
+        <article class="produit-card reveal" data-id="${produit.id}">
+          <div class="produit-img">
+            ${badgeHtml}
+            <i data-lucide="${produit.icon}"></i>
+            <span class="produit-img-label">AVA CORP</span>
           </div>
-          <div class="product-info">
-            <h3>${p.name}</h3><p>${p.desc}</p>
-            <div class="product-footer">
-              <span class="product-price">${p.price.toLocaleString()} FCFA</span>
-              <button class="btn btn-secondary btn-icon-only add-btn" data-id="${p.id}"><i data-lucide="plus"></i></button>
+          <div class="produit-body">
+            <h3 class="produit-name">${produit.name}</h3>
+            <p class="produit-desc">${produit.desc}</p>
+            <div class="produit-footer">
+              <span class="produit-prix">${formatFCFA(produit.prix)}</span>
+              <button class="btn-add-cart" data-produit-id="${produit.id}" aria-label="Ajouter ${produit.name} au panier">
+                <i data-lucide="shopping-basket"></i> Ajouter
+              </button>
             </div>
           </div>
-        </div>
-      `).join('');
-      if (typeof lucide !== 'undefined') lucide.createIcons();
+        </article>
+      `;
+    };
 
-      grid.querySelectorAll(".add-btn").forEach(b => {
-        b.addEventListener("click", () => {
-          const id = b.getAttribute("data-id");
-          const prod = PRODUITS.find(p => p.id === id);
-          const exist = panier.find(item => item.id === id);
-          if (exist) exist.qty++;
-          else panier.push({ ...prod, qty: 1 });
-          saveAndUpdate();
-          showToast("Produit ajouté !");
+    const afficherCatalogue = () => {
+      const grid = $('#produitsGrid');
+      if (!grid) return;
+
+      grid.innerHTML = CATALOGUE.map(genererCarteProduit).join('');
+
+      if (window.lucide) window.lucide.createIcons();
+
+      grid.querySelectorAll('.btn-add-cart').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.produitId;
+          cart.ajouter(id);
         });
       });
+    };
 
-      // Vider et valider panier
-      document.getElementById("clearCartBtn").addEventListener("click", () => { panier = []; saveAndUpdate(); });
-      document.getElementById("validateCartBtn").addEventListener("click", () => {
-        let text = `🛒 *NOUVELLE COMMANDE - AVA CORP*\n\n`;
-        let total = 0;
-        panier.forEach(i => {
-          text += `▪️ *${i.name}* (x${i.qty}) : ${(i.price * i.qty).toLocaleString()} FCFA\n`;
-          total += i.price * i.qty;
-        });
-        text += `\n💰 *TOTAL global : ${total.toLocaleString()} FCFA*`;
-        window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(text)}`, '_blank');
-      });
+    /* ─────────────────────────────────────────────────────────
+       4. GESTIONNAIRE DU PANIER
+       ───────────────────────────────────────────────────────── */
+    const cart = (() => {
+      let articles = [];
 
-      // Modals Formations
-      const modal = document.getElementById("inscriptionModal");
-      document.querySelectorAll("#heroInscriptionBtn, #formationInscriptionBtn, #formationInscriptionBtn2").forEach(btn => {
-        btn.addEventListener("click", () => modal.classList.add("modal-overlay--active"));
-      });
-      document.getElementById("modalClose").addEventListener("click", () => modal.classList.remove("modal-overlay--active"));
-
-      document.getElementById("submitInscription").addEventListener("click", () => {
-        const nom = document.getElementById("inscNom").value;
-        const tel = document.getElementById("inscTel").value;
-        const ville = document.getElementById("inscVille").value;
-        if(!nom || !tel || !ville) return showToast("Remplissez tous les champs.");
-        
-        let msg = `🎓 *INSCRIPTION FORMATION FOSS*\n\n👤 Nom : ${nom}\n📞 Tel : ${tel}\n📍 Ville : ${ville}`;
-        window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
-        modal.classList.remove("modal-overlay--active");
-      });
-
-      window.modifierQty = (id, change) => {
-        const item = panier.find(i => i.id === id);
-        if (item) {
-          item.qty += change;
-          if (item.qty <= 0) panier = panier.filter(i => i.id !== id);
-          saveAndUpdate();
+      const charger = () => {
+        try {
+          const raw = localStorage.getItem(CART_STORAGE_KEY);
+          articles = raw ? JSON.parse(raw) : [];
+        } catch {
+          articles = [];
         }
       };
 
-      function saveAndUpdate() {
-        localStorage.setItem('ava_cart', JSON.stringify(panier));
-        document.getElementById("cartCount").textContent = panier.reduce((a, b) => a + b.qty, 0);
-        const wrapper = document.getElementById("cartItemsWrapper");
-        const footer = document.getElementById("cartFooter");
-        
-        if(panier.length === 0) {
-          wrapper.innerHTML = `<div class="cart-empty"><p>Votre panier est vide.</p></div>`;
-          footer.style.display = "none";
-        } else {
-          footer.style.display = "block";
-          let total = 0;
-          wrapper.innerHTML = panier.map(i => {
-            total += i.price * i.qty;
-            return `<div class="cart-item">
-              <div class="cart-item-details"><h4>${i.name}</h4><span>${i.price.toLocaleString()} FCFA</span></div>
-              <div class="cart-item-actions">
-                <button class="qty-btn" onclick="modifierQty('${i.id}', -1)">-</button>
-                <span class="qty-val">${i.qty}</span>
-                <button class="qty-btn" onclick="modifierQty('${i.id}', 1)">+</button>
-              </div>
-            </div>`;
-          }).join('');
-          document.getElementById("cartTotal").textContent = `${total.toLocaleString()} FCFA`;
+      const sauvegarder = () => {
+        try {
+          localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(articles));
+        } catch {}
+      };
+
+      const calculerTotal = () =>
+        articles.reduce((sum, art) => {
+          const produit = CATALOGUE.find((p) => p.id === art.id);
+          return produit ? sum + produit.prix * art.quantite : sum;
+        }, 0);
+
+      const rendreDOM = () => {
+        const wrapper  = $('#cartItemsWrapper');
+        const totalEl  = $('#cartTotal');
+        const countEl  = $('#cartCount');
+        const footerEl = $('#cartFooter');
+
+        if (!wrapper) return;
+
+        const nbArticles = articles.reduce((s, a) => s + a.quantite, 0);
+        if (countEl) {
+          countEl.textContent = nbArticles;
+          countEl.classList.toggle('visible', nbArticles > 0);
         }
+
+        if (articles.length === 0) {
+          wrapper.innerHTML = `
+            <div class="cart-empty">
+              <i data-lucide="shopping-basket"></i>
+              <p>Votre panier est vide.<br/>Ajoutez des produits depuis la boutique.</p>
+            </div>
+          `;
+          if (footerEl) footerEl.style.display = 'none';
+          if (window.lucide) window.lucide.createIcons();
+          return;
+        }
+
+        if (footerEl) footerEl.style.removeProperty('display');
+
+        wrapper.innerHTML = articles.map((art) => {
+          const produit = CATALOGUE.find((p) => p.id === art.id);
+          if (!produit) return '';
+
+          return `
+            <div class="cart-item" data-cart-id="${produit.id}">
+              <div class="cart-item-icon"><i data-lucide="${produit.icon}"></i></div>
+              <div class="cart-item-info">
+                <div class="cart-item-name">${produit.name}</div>
+                <div class="cart-item-price">${formatFCFA(produit.prix)} / unité</div>
+                <div class="cart-item-qty">
+                  <button class="qty-btn" data-action="decrement" data-id="${produit.id}">−</button>
+                  <span class="qty-value" aria-live="polite">${art.quantite}</span>
+                  <button class="qty-btn" data-action="increment" data-id="${produit.id}">+</button>
+                </div>
+              </div>
+              <button class="cart-item-delete" data-id="${produit.id}"><i data-lucide="trash-2"></i></button>
+            </div>
+          `;
+        }).join('');
+
+        if (totalEl) totalEl.textContent = formatFCFA(calculerTotal());
+        if (window.lucide) window.lucide.createIcons();
+
+        wrapper.querySelectorAll('.qty-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const action = btn.dataset.action;
+            const id     = btn.dataset.id;
+            if (action === 'increment') cart.incrementer(id);
+            else                        cart.decrementer(id);
+          });
+        });
+
+        wrapper.querySelectorAll('.cart-item-delete').forEach((btn) => {
+          btn.addEventListener('click', () => cart.supprimer(btn.dataset.id));
+        });
+      };
+
+      return {
+        init() {
+          charger();
+          rendreDOM();
+        },
+        ajouter(id) {
+          const produit = CATALOGUE.find((p) => p.id === id);
+          if (!produit) return;
+
+          const existant = articles.find((a) => a.id === id);
+          if (existant) {
+            existant.quantite++;
+          } else {
+            articles.push({ id, quantite: 1 });
+          }
+          sauvegarder();
+          rendreDOM();
+          showToast(`✓ ${produit.name} ajouté au panier`);
+        },
+        incrementer(id) {
+          const art = articles.find((a) => a.id === id);
+          if (art) { art.quantite++; sauvegarder(); rendreDOM(); }
+        },
+        decrementer(id) {
+          const art = articles.find((a) => a.id === id);
+          if (!art) return;
+          art.quantite--;
+          if (art.quantite <= 0) {
+            cart.supprimer(id);
+          } else {
+            sauvegarder();
+            rendreDOM();
+          }
+        },
+        supprimer(id) {
+          articles = articles.filter((a) => a.id !== id);
+          sauvegarder();
+          rendreDOM();
+        },
+        vider() {
+          articles = [];
+          sauvegarder();
+          rendreDOM();
+          showToast('Panier vidé.');
+        },
+        getData() {
+          return { articles: [...articles], total: calculerTotal() };
+        }
+      };
+    })();
+
+    /* ─────────────────────────────────────────────────────────
+       5. TUNNEL WHATSAPP – BOUTIQUE
+       ───────────────────────────────────────────────────────── */
+    const validerCommandeWhatsApp = () => {
+      const { articles, total } = cart.getData();
+
+      if (articles.length === 0) {
+        showToast('⚠️ Votre panier est vide.');
+        return;
       }
 
-      function showToast(m) {
-        const t = document.getElementById("toast"); t.textContent = m; t.classList.add("toast--active");
-        setTimeout(() => t.classList.remove("toast--active"), 2500);
+      const lignes = articles
+        .map((art) => {
+          const produit = CATALOGUE.find((p) => p.id === art.id);
+          if (!produit) return null;
+          const sousTotal = produit.prix * art.quantite;
+          return `  • ${produit.name} × ${art.quantite} = ${formatFCFA(sousTotal)}`;
+        })
+        .filter(Boolean)
+        .join('\n');
+
+      const message = [
+        '🌿 *Commande AVA CORP – Boutique FOSS*',
+        '─────────────────────────',
+        lignes,
+        '─────────────────────────',
+        `*TOTAL : ${formatFCFA(total)}*`,
+        '',
+        'Bonjour, je souhaite valider cette commande. Merci de me confirmer la disponibilité et les modalités de paiement / livraison.',
+      ].join('\n');
+
+      window.open(buildWaUrl(message), '_blank', 'noopener,noreferrer');
+    };
+
+    /* ─────────────────────────────────────────────────────────
+       6. TUNNEL WHATSAPP – FORMATION
+       ───────────────────────────────────────────────────────── */
+    const soumettreInscription = (nom, telephone, ville) => {
+      nom       = nom.trim();
+      telephone = telephone.trim();
+      ville     = ville.trim();
+
+      let valide = true;
+
+      const setError = (id, msg) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = msg;
+      };
+
+      const clearErrors = () => {
+        ['errNom', 'errTel', 'errVille'].forEach((id) => setError(id, ''));
+        ['inscNom', 'inscTel', 'inscVille'].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.classList.remove('error');
+        });
+      };
+
+      clearErrors();
+
+      if (!nom || nom.length < 3) {
+        setError('errNom', 'Veuillez entrer votre nom complet (min. 3 caractères).');
+        document.getElementById('inscNom')?.classList.add('error');
+        valide = false;
       }
-      saveAndUpdate();
+
+      const telNum = telephone.replace(/[\s-().+]/g, '');
+      if (!telNum || !/^\d{8,15}$/.test(telNum)) {
+        setError('errTel', 'Numéro invalide. Ex : 6XXXXXXXX');
+        document.getElementById('inscTel')?.classList.add('error');
+        valide = false;
+      }
+
+      if (!ville || ville.length < 2) {
+        setError('errVille', 'Veuillez indiquer votre ville de résidence.');
+        document.getElementById('inscVille')?.classList.add('error');
+        valide = false;
+      }
+
+      if (!valide) return false;
+
+      const message = [
+        '🌿 *Inscription – Formation FOSS AVA CORP*',
+        '─────────────────────────',
+        `👤 *Nom complet :* ${nom}`,
+        `📞 *Téléphone :* ${telephone}`,
+        `📍 *Ville :* ${ville}`,
+        '─────────────────────────',
+        'Bonjour AVA CORP, je souhaite m\'inscrire à la formation FOSS sur l\'élevage de hannetons prévue le *Samedi 22 Novembre*.',
+        'Merci de me confirmer les modalités d\'inscription.',
+      ].join('\n');
+
+      window.open(buildWaUrl(message), '_blank', 'noopener,noreferrer');
+      return true;
+    };
+
+    /* ─────────────────────────────────────────────────────────
+       7. MODAL INSCRIPTION
+       ───────────────────────────────────────────────────────── */
+    const ouvrirModal = () => {
+      const modal   = $('#inscriptionModal');
+      const overlay = $('#overlay');
+      if (!modal) return;
+      modal.classList.add('open');
+      overlay?.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('inscNom')?.focus(), 100);
+    };
+
+    const fermerModal = () => {
+      const modal   = $('#inscriptionModal');
+      const overlay = $('#overlay');
+      if (!modal) return;
+      modal.classList.remove('open');
+      if (!$('#cartSidebar')?.classList.contains('open')) {
+        overlay?.classList.remove('visible');
+      }
+      document.body.style.overflow = '';
+    };
+
+    const initModal = () => {
+      ['heroInscriptionBtn', 'formationInscriptionBtn'].forEach((id) => {
+        const btn = document.getElementById(id);
+        btn?.addEventListener('click', ouvrirModal);
+      });
+
+      document.getElementById('modalClose')?.addEventListener('click', fermerModal);
+
+      $('#inscriptionModal')?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) fermerModal();
+      });
+
+      document.getElementById('submitInscription')?.addEventListener('click', () => {
+        const nom   = document.getElementById('inscNom')?.value ?? '';
+        const tel   = document.getElementById('inscTel')?.value ?? '';
+        const ville = document.getElementById('inscVille')?.value ?? '';
+
+        if (soumettreInscription(nom, tel, ville)) {
+          fermerModal();
+          ['inscNom', 'inscTel', 'inscVille'].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+          });
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && $('#inscriptionModal')?.classList.contains('open')) {
+          fermerModal();
+        }
+      });
+    };
+
+    /* ─────────────────────────────────────────────────────────
+       8. NAVBAR (scroll + burger)
+       ───────────────────────────────────────────────────────── */
+    const initNavbar = () => {
+      const navbar     = document.getElementById('navbar');
+      const burger     = document.getElementById('burgerBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      if (!navbar) return;
+
+      const onScroll = () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      burger?.addEventListener('click', () => {
+        const isOpen = mobileMenu?.classList.contains('open');
+        mobileMenu?.classList.toggle('open');
+        burger.classList.toggle('open');
+        burger.setAttribute('aria-expanded', String(!isOpen));
+        mobileMenu?.setAttribute('aria-hidden', String(isOpen));
+      });
+
+      mobileMenu?.querySelectorAll('.mobile-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          burger?.classList.remove('open');
+          burger?.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        });
+      });
+    };
+
+    /* ─────────────────────────────────────────────────────────
+       9. PANIER SIDEBAR (ouverture / fermeture)
+       ───────────────────────────────────────────────────────── */
+    const initCartSidebar = () => {
+      const sidebar = document.getElementById('cartSidebar');
+      const overlay = document.getElementById('overlay');
+
+      const ouvrirPanier = () => {
+        sidebar?.classList.add('open');
+        overlay?.classList.add('visible');
+        sidebar?.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const fermerPanier = () => {
+        sidebar?.classList.remove('open');
+        if (!$('#inscriptionModal')?.classList.contains('open')) {
+          overlay?.classList.remove('visible');
+        }
+        sidebar?.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      document.getElementById('cartToggle')?.addEventListener('click', ouvrirPanier);
+      document.getElementById('cartClose')?.addEventListener('click', fermerPanier);
+
+      overlay?.addEventListener('click', () => {
+        fermerPanier();
+        fermerModal();
+      });
+
+      document.getElementById('validateCartBtn')?.addEventListener('click', () => {
+        validerCommandeWhatsApp();
+      });
+
+      document.getElementById('clearCartBtn')?.addEventListener('click', () => {
+        if (confirm('Vider complètement votre panier ?')) {
+          cart.vider();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar?.classList.contains('open')) {
+          fermerPanier();
+        }
+      });
+    };
+
+    /* ─────────────────────────────────────────────────────────
+       10. ANIMATIONS AU SCROLL (IntersectionObserver)
+       ───────────────────────────────────────────────────────── */
+    const initScrollReveal = () => {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              entry.target.style.transitionDelay = `${i * 60}ms`;
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: '0px 0px -40px 0px',
+        }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    };
+
+    /* ─────────────────────────────────────────────────────────
+       11. INITIALISATION DEFINITIVE
+       ───────────────────────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+
+      afficherCatalogue();
+      cart.init();
+      initNavbar();
+      initCartSidebar();
+      initModal();
+
+      requestAnimationFrame(initScrollReveal);
+
+      if (window.lucide) window.lucide.createIcons();
+
+      console.log('%c🌿 AVA CORP – Projet FOSS initialisé', 'color:#1A4D2E;font-weight:bold;');
     });
   </script>
 </body>
